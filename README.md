@@ -4,11 +4,11 @@
 
 We focus on **deep technical understanding**, **production-grade system design**, and **real-world implementations** of RTC systems including WebRTC, VoIP, media servers, and signaling infrastructure.
 
-🌐 Official Website: https://rtcview.com
+Official Website: https://rtcview.com
 
 ---
 
-## 🚀 Mission
+## Mission
 
 To build the most reliable, practical, and technically accurate open resource for engineers working with real-time communication systems.
 
@@ -21,7 +21,7 @@ RTCView is designed for:
 
 ---
 
-## 🧠 What We Cover
+## What We Cover
 
 ### 🔹 WebRTC
 
@@ -55,8 +55,8 @@ RTCView is designed for:
 
 For collaboration, contributions, or feedback:
 
-📧 contact@rtcview.com  
-🌐 https://rtcview.com
+Email: contact@rtcview.com  
+Site: https://rtcview.com
 
 ---
 
