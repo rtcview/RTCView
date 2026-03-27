@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Earth2050 - Meet The Earth's Peoples</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+  <nav>
+    <div class="flex items-center justify-between p-4 bg-slate-200 text-slate-800">
+      <h1 class="text-xl font-bold">Earth2050</h1>
+      <ul class="flex space-x-4">
+        <li><a href="#" class="hover:text-gray-400">Home</a></li>
+        <li><a href="#" class="hover:text-gray-400">About</a></li>
+        <li><a href="#" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Remote User Screen -->
+  <div class="p-4 flex  items-center justify-between justify-center">
+
+    <div class="w-2/5 h-100 bg-gray-300 rounded-lg flex items-center justify-center">
+      <span class="text-gray-500">Remote user screen will be displayed here.</span>
+      <video class="w-full h-full object-cover rounded-lg" autoplay muted>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </div>
+    
+  </div>
+  <!-- Action Buttons    -->
+  <div class="p-4 flex items-center justify-center space-x-4">
+    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Change</button>
+    <button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Mute</button>
+    <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">End Call</button>
+  </div>
+<!-- Local User Screen -->
+  <div class="p-14 flex  items-center justify-between justify-end">
+
+    <div class="w-1/5 h-100 bg-gray-300 rounded-lg flex items-center justify-center">
+      <span class="text-gray-500">Local user screen will be displayed here.</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+    // JavaScript to handle button actions can be added here
+</body>
+</html>
