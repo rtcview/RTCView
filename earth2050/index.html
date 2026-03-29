@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Earth2050 - Meet The Earth's Peoples</title>
+
 </head>
 <body>
 
@@ -15,7 +16,127 @@
 <video id="localVideo" autoplay muted playsinline width="300"></video>
 <video id="remoteVideo" autoplay playsinline width="300"></video>
 
-<script src="script.js"></script>
+<script>
+const myId = Math.floor(Math.random() * 10000).toString();
+document.getElementById("myId").innerText = myId;
+
+const ws = new WebSocket("ws://localhost:8080");
+// Ws connection opened and register the client ID
+ws.onopen = () => {
+  ws.send(JSON.stringify({
+    type: "register",
+    id: myId
+  }));
+};
+
+// RTC peer connection setup 
+const pc = new RTCPeerConnection({
+  iceServers: [
+    { urls: "stun:stun.l.google.com:19302" }
+  ]
+});
+
+// Camera and microphone access
+
+const localVideo = document.getElementById("localVideo");
+const remoteVideo = document.getElementById("remoteVideo");
+
+let localStream;
+
+async function initMedia() {
+  localStream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true
+  });
+
+  localVideo.srcObject = localStream;
+
+  localStream.getTracks().forEach(track => {
+    pc.addTrack(track, localStream);
+  });
+}
+
+// Receive remote stream
+pc.ontrack = (event) => {
+  remoteVideo.srcObject = event.streams[0];
+};
+
+// Ice candidate handling
+
+pc.onicecandidate = (event) => {
+  if (event.candidate) {
+    ws.send(JSON.stringify({
+      type: "ice-candidate",
+      to: targetId,
+      from: myId,
+      candidate: event.candidate
+    }));
+  }
+};
+
+// Start a call
+
+let targetId;
+
+async function startCall() {
+  targetId = document.getElementById("targetId").value;
+
+  await initMedia();
+
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+
+  ws.send(JSON.stringify({
+    type: "offer",
+    to: targetId,
+    from: myId,
+    sdp: offer
+  }));
+}
+// Handle incoming messages
+ws.onmessage = async (message) => {
+  const data = JSON.parse(message.data);
+
+  switch (data.type) {
+
+    case "offer":
+      targetId = data.from;
+
+      await initMedia();
+
+      await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
+
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+
+      ws.send(JSON.stringify({
+        type: "answer",
+        to: targetId,
+        from: myId,
+        sdp: answer
+      }));
+      break;
+
+    case "answer":
+      await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
+      break;
+
+    case "ice-candidate":
+      try {
+        await pc.addIceCandidate(data.candidate);
+      } catch (e) {
+        console.error("ICE error", e);
+      }
+      break;
+  }
+};
+
+// 
+
+
+
+
+</script>
 
 </body>
 </html>
