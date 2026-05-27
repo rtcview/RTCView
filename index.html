@@ -1,203 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Primary Meta -->
-<meta name="description" content="RTCView is an open knowledge platform for WebRTC, VoIP, media servers, SFU, signaling, and real-time communication architecture. Advanced RTC articles and projects." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta name="keywords" content="WebRTC, real-time communication, RTC, VoIP, media server, SFU, TURN, STUN, SIP, video calling architecture" />
+  <!-- SEO -->
+  <meta name="description"
+    content="RTCView is an advanced real-time communication engineering platform covering WebRTC, VoIP, SFU, media servers, RTP, SIP, and scalable RTC infrastructure." />
 
-<meta name="author" content="RTCView" />
+  <meta name="keywords"
+    content="WebRTC, VoIP, SFU, RTC, RTP, SIP, TURN, STUN, media server, LiveKit, mediasoup, Janus, real-time communication" />
 
-<!-- Open Graph -->
-<meta property="og:title" content="RTCView | Real-Time Communication Knowledge Hub" />
-<meta property="og:description" content="Advanced WebRTC, VoIP, SFU, and RTC system architecture articles and open-source projects." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://rtcview.com" />
-<meta property="og:image" content="https://rtcview.com/og-image.png" />
+  <meta name="author" content="RTCView" />
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="RTCView | Real-Time Communication Knowledge Hub" />
-<meta name="twitter:description" content="Deep technical articles on WebRTC, VoIP, SFU, and RTC scaling." />
-<meta name="twitter:image" content="https://rtcview.com/og-image.png" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="RTCView | Real-Time Communication Engineering" />
+  <meta property="og:description"
+    content="Advanced WebRTC, SFU, VoIP, and RTC infrastructure engineering platform." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rtcview.com" />
+  <meta property="og:image" content="https://rtcview.com/og-image.png" />
 
-  <title>RTCView | Real-Time Communication Knowledge Hub</title>
+  <title>RTCView | Real-Time Communication Engineering</title>
 
-  <!-- Tailwind CDN -->
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Custom Tailwind Config -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          },
           colors: {
-            primary: '#0ea5e9',
-            dark: '#020617'
+            primary: '#2563eb',
+            secondary: '#7c3aed',
+            dark: '#0f172a',
+            muted: '#64748b'
           }
         }
       }
     }
   </script>
 
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "RTCView - Real-Time Communication Knowledge Hub",
-  "description": "Advanced WebRTC, VoIP, SFU, and RTC architecture articles and projects.",
-  "author": {
-    "@type": "Organization",
-    "name": "RTCView"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "RTCView",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://rtcview.com/logo.png"
-    }
-  }
-}
-</script>
-
 </head>
 
-<body class="bg-dark text-gray-200">
+<body class="bg-white text-slate-900 font-sans overflow-x-hidden">
 
   <!-- Navbar -->
-  <header class="border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-white tracking-wide">RTC<span class="text-primary">View</span></h1>
-      <nav class="hidden md:flex space-x-8 text-sm">
-        <a href="#" class="hover:text-primary">Articles</a>
-        <a href="#" class="hover:text-primary">Projects</a>
-        <a href="#" class="hover:text-primary">Docs</a>
-        <a href="https://github.com/rtcview/" class="hover:text-primary">GitHub</a>
+  <header
+    class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-xl">
+    <div
+      class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+      <div class="flex items-center gap-2">
+        <div
+          class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold">
+          R
+        </div>
+
+        <h1 class="text-2xl font-black tracking-tight">
+          RTC<span class="text-primary">View</span>
+        </h1>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-10 text-sm font-medium">
+        <a href="#"
+          class="text-slate-600 hover:text-primary transition">Articles</a>
+
+        <a href="#"
+          class="text-slate-600 hover:text-primary transition">Architecture</a>
+
+        <a href="#"
+          class="text-slate-600 hover:text-primary transition">Projects</a>
+
+        <a href="#"
+          class="text-slate-600 hover:text-primary transition">Docs</a>
       </nav>
+
+      <div class="flex items-center gap-4">
+
+        <a href="#"
+          class="hidden md:inline-flex px-5 py-2.5 rounded-xl border border-slate-300 hover:border-primary hover:text-primary transition">
+          GitHub
+        </a>
+
+        <a href="#"
+          class="px-5 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition shadow-lg">
+          Start Learning
+        </a>
+
+      </div>
+
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 py-32 text-center">
-      <h2 class="text-4xl md:text-6xl font-extrabold leading-tight text-white">
-        The Open Platform for <br/>
-        <span class="text-primary">Real-Time Communication</span>
-      </h2>
 
-      <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-400">
-        Deep technical articles, system-level insights, and real-world projects
-        covering WebRTC, VoIP, media servers, and large-scale RTC architecture.
-      </p>
+    <!-- Background Blur -->
+    <div class="absolute inset-0">
 
-      <div class="mt-10 flex justify-center gap-6">
-        <a href="#" class="px-8 py-4 bg-primary text-black font-semibold rounded-lg hover:opacity-90 transition">
-          Explore Articles
-        </a>
-        <a href="https://github.com/rtcview/RTCView" class="px-8 py-4 border border-gray-700 rounded-lg hover:border-primary transition">
-          View on GitHub
-        </a>
+      <div
+        class="absolute top-[-100px] left-[20%] w-[500px] h-[500px] bg-blue-100 rounded-full blur-3xl opacity-50">
       </div>
+
+      <div
+        class="absolute bottom-[-100px] right-0 w-[450px] h-[450px] bg-cyan-100 rounded-full blur-3xl opacity-50">
+      </div>
+
     </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 py-28 lg:py-36">
+
+      <div class="grid lg:grid-cols-2 gap-24 items-center">
+
+        <!-- Left -->
+        <div>
+
+          <div
+            class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-blue-100 bg-blue-50 text-blue-700 text-sm font-semibold">
+
+            <span
+              class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+
+            Advanced RTC Engineering Platform
+
+          </div>
+
+          <h2
+            class="mt-8 text-5xl md:text-7xl font-black leading-tight tracking-tight">
+
+            Master
+            <span
+              class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+              Real-Time
+            </span>
+            Communication
+
+          </h2>
+
+          <p
+            class="mt-8 text-xl text-slate-600 leading-relaxed max-w-2xl">
+
+            Deep technical articles, system architecture breakdowns,
+            media server engineering, SFU scaling, VoIP systems,
+            and production-grade RTC infrastructure.
+
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-5">
+
+            <a href="#"
+              class="px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold shadow-xl shadow-blue-200 hover:scale-105 transition duration-300">
+
+              Explore Articles
+
+            </a>
+
+            <a href="#"
+              class="px-8 py-4 rounded-2xl border border-slate-300 text-slate-700 hover:border-primary hover:text-primary transition">
+
+              View GitHub
+
+            </a>
+
+          </div>
+
+          <!-- Tech Tags -->
+          <div class="mt-12 flex flex-wrap gap-3">
+
+            <span
+              class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+              WebRTC
+            </span>
+
+            <span
+              class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+              RTP
+            </span>
+
+            <span
+              class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+              SIP
+            </span>
+
+            <span
+              class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+              SFU
+            </span>
+
+            <span
+              class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+              TURN
+            </span>
+
+            <span
+              class="px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium">
+              VoIP
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- Right -->
+        <div class="relative">
+
+          <div
+            class="rounded-[32px] bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden">
+
+            <!-- Top -->
+            <div
+              class="px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+
+              <div class="w-3 h-3 rounded-full bg-red-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+
+              <div class="ml-4 text-slate-400 text-sm">
+                rtc-cluster.yaml
+              </div>
+
+            </div>
+
+            <!-- Code -->
+            <div class="p-8 overflow-x-auto">
+
+<pre class="text-sm leading-8 text-slate-300">
+global:
+  region: asia-south
+
+cluster:
+  signaling:
+    replicas: 4
+
+  turn:
+    provider: coturn
+
+  sfu:
+    engine: mediasoup
+    autoscaling: enabled
+
+  recording:
+    storage: s3
+
+  monitoring:
+    metrics: prometheus
+    logs: grafana
+</pre>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Metrics -->
+  <section class="py-20 border-t border-slate-200 bg-slate-50">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+
+        <div>
+          <h3 class="text-5xl font-black text-slate-900">50+</h3>
+          <p class="mt-3 text-slate-600">RTC Engineering Articles</p>
+        </div>
+
+        <div>
+          <h3 class="text-5xl font-black text-slate-900">10K+</h3>
+          <p class="mt-3 text-slate-600">Developers Reached</p>
+        </div>
+
+        <div>
+          <h3 class="text-5xl font-black text-slate-900">20+</h3>
+          <p class="mt-3 text-slate-600">Architecture Breakdowns</p>
+        </div>
+
+        <div>
+          <h3 class="text-5xl font-black text-slate-900">100%</h3>
+          <p class="mt-3 text-slate-600">Open Knowledge</p>
+        </div>
+
+      </div>
+
+    </div>
+
   </section>
 
   <!-- What We Cover -->
-  <section class="bg-[#020617] border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 py-24">
-      <h3 class="text-3xl font-bold text-white text-center">What We Cover</h3>
+  <section class="py-32">
 
-      <div class="grid md:grid-cols-3 gap-10 mt-16">
+    <div class="max-w-7xl mx-auto px-6">
 
-        <div class="p-8 bg-[#020617] border border-gray-800 rounded-xl">
-          <h4 class="text-xl font-semibold text-primary">WebRTC Internals</h4>
-          <p class="mt-4 text-gray-400">
-            ICE, STUN, TURN, SDP, codecs, bandwidth control, jitter buffers,
-            browser internals, and optimization techniques.
-          </p>
+      <div class="text-center">
+
+        <div
+          class="inline-flex px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-semibold border border-blue-100">
+
+          Core Technologies
+
         </div>
 
-        <div class="p-8 bg-[#020617] border border-gray-800 rounded-xl">
-          <h4 class="text-xl font-semibold text-primary">Media Servers</h4>
-          <p class="mt-4 text-gray-400">
-            SFU, MCU, selective forwarding, media routing, scalability,
-            and production-grade RTC infrastructure design.
+        <h3 class="mt-6 text-5xl font-black tracking-tight">
+          What We Cover
+        </h3>
+
+        <p class="mt-6 text-xl text-slate-600 max-w-3xl mx-auto">
+          Advanced real-time communication technologies and
+          production-level infrastructure systems.
+        </p>
+
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mt-20">
+
+        <!-- Card -->
+        <div
+          class="group bg-white border border-slate-200 rounded-3xl p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
+
+          <div
+            class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-3xl">
+            ⚡
+          </div>
+
+          <h4 class="mt-8 text-2xl font-bold">
+            WebRTC Internals
+          </h4>
+
+          <p class="mt-5 text-slate-600 leading-relaxed">
+            ICE, STUN, TURN, SDP, adaptive bitrate,
+            packet loss recovery, codecs,
+            congestion control, and browser internals.
           </p>
+
         </div>
 
-        <div class="p-8 bg-[#020617] border border-gray-800 rounded-xl">
-          <h4 class="text-xl font-semibold text-primary">VoIP & Signaling</h4>
-          <p class="mt-4 text-gray-400">
-            SIP, RTP, signaling servers, call flows, recording,
-            PSTN integration, and telecom-grade systems.
+        <!-- Card -->
+        <div
+          class="group bg-white border border-slate-200 rounded-3xl p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
+
+          <div
+            class="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center text-3xl">
+            🌐
+          </div>
+
+          <h4 class="mt-8 text-2xl font-bold">
+            Media Servers
+          </h4>
+
+          <p class="mt-5 text-slate-600 leading-relaxed">
+            SFU architecture, media routing,
+            selective forwarding, scaling strategies,
+            clustering, and distributed RTC systems.
           </p>
+
+        </div>
+
+        <!-- Card -->
+        <div
+          class="group bg-white border border-slate-200 rounded-3xl p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-500">
+
+          <div
+            class="w-16 h-16 rounded-2xl bg-violet-50 flex items-center justify-center text-3xl">
+            📡
+          </div>
+
+          <h4 class="mt-8 text-2xl font-bold">
+            VoIP & SIP
+          </h4>
+
+          <p class="mt-5 text-slate-600 leading-relaxed">
+            SIP signaling, RTP flows,
+            PSTN integration, telecom infrastructure,
+            call recording, and enterprise VoIP systems.
+          </p>
+
         </div>
 
       </div>
+
     </div>
+
   </section>
 
-  <!-- Why RTCView -->
-  <section class="border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 py-24">
-      <div class="grid md:grid-cols-2 gap-16 items-center">
+  <!-- Architecture Section -->
+  <section class="py-32 bg-slate-50 border-y border-slate-200">
 
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+        <!-- Left -->
         <div>
-          <h3 class="text-3xl font-bold text-white">
-            Built by RTC Engineers. <br/>For RTC Engineers.
+
+          <div
+            class="inline-flex px-4 py-2 rounded-full bg-violet-50 text-violet-700 text-sm font-semibold border border-violet-100">
+
+            Production Architecture
+
+          </div>
+
+          <h3 class="mt-6 text-5xl font-black leading-tight">
+            Built By RTC Engineers.
+            <br />
+            For RTC Engineers.
           </h3>
-          <p class="mt-6 text-gray-400 leading-relaxed">
-            RTCView is not a beginner tutorial site.
-            We focus on real systems, real failures, real scaling challenges,
-            and production-level RTC architecture.
+
+          <p class="mt-8 text-xl text-slate-600 leading-relaxed">
+            RTCView focuses on real production infrastructure,
+            not shallow tutorials. We explore scalability,
+            media pipelines, failures, monitoring,
+            and engineering tradeoffs.
           </p>
 
-          <ul class="mt-8 space-y-4 text-gray-400">
-            <li>• No shallow content</li>
-            <li>• Open-source driven</li>
-            <li>• Real-world project breakdowns</li>
-            <li>• Advanced architecture discussions</li>
-          </ul>
+          <div class="mt-10 space-y-5">
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                ✓
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-lg">
+                  Advanced RTC Knowledge
+                </h4>
+
+                <p class="text-slate-600 mt-1">
+                  Deep engineering insights beyond beginner tutorials.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                ✓
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-lg">
+                  Real Infrastructure Design
+                </h4>
+
+                <p class="text-slate-600 mt-1">
+                  SFU scaling, TURN deployment, RTP routing, and optimization.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div
+                class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                ✓
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-lg">
+                  Open Source Driven
+                </h4>
+
+                <p class="text-slate-600 mt-1">
+                  Learn from real systems and real engineering patterns.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="p-10 bg-[#020617] border border-gray-800 rounded-2xl">
-          <h4 class="text-xl font-semibold text-primary">Open & Community-Driven</h4>
-          <p class="mt-4 text-gray-400">
-            All content and projects are hosted openly on GitHub.
-            Contributions, discussions, and improvements are always welcome.
-          </p>
-          <a href="https://github.com/rtcview/RTCView" class="inline-block mt-6 text-primary hover:underline">
-            Contribute on GitHub →
-          </a>
+        <!-- Right -->
+        <div>
+
+          <div
+            class="bg-white border border-slate-200 rounded-[32px] p-10 shadow-xl">
+
+            <div
+              class="flex items-center justify-between pb-6 border-b border-slate-200">
+
+              <h4 class="text-2xl font-bold">
+                RTC Stack
+              </h4>
+
+              <span
+                class="px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+                Production Ready
+              </span>
+
+            </div>
+
+            <div class="mt-8 space-y-5">
+
+              <div
+                class="flex items-center justify-between p-5 rounded-2xl bg-slate-50">
+
+                <span class="font-semibold">WebRTC</span>
+                <span class="text-blue-600 font-semibold">Core Layer</span>
+
+              </div>
+
+              <div
+                class="flex items-center justify-between p-5 rounded-2xl bg-slate-50">
+
+                <span class="font-semibold">TURN/STUN</span>
+                <span class="text-blue-600 font-semibold">Networking</span>
+
+              </div>
+
+              <div
+                class="flex items-center justify-between p-5 rounded-2xl bg-slate-50">
+
+                <span class="font-semibold">mediasoup / Pion</span>
+                <span class="text-blue-600 font-semibold">SFU Engine</span>
+
+              </div>
+
+              <div
+                class="flex items-center justify-between p-5 rounded-2xl bg-slate-50">
+
+                <span class="font-semibold">RTP / RTCP</span>
+                <span class="text-blue-600 font-semibold">Media Transport</span>
+
+              </div>
+
+              <div
+                class="flex items-center justify-between p-5 rounded-2xl bg-slate-50">
+
+                <span class="font-semibold">Prometheus</span>
+                <span class="text-blue-600 font-semibold">Monitoring</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
       </div>
-    </div>
-  </section>
-  <section class="max-w-5xl mx-auto px-6 py-20 text-gray-400 text-sm leading-relaxed">
-  <h2 class="text-xl font-semibold text-white mb-4">
-    Real-Time Communication Engineering Resource
-  </h2>
-  <p>
-    RTCView is a dedicated platform for engineers working with real-time communication technologies such as WebRTC, VoIP, SIP, RTP, and media server architecture.
-    We publish in-depth technical articles, implementation guides, and real-world RTC project breakdowns focusing on performance, scalability, and production readiness.
-  </p>
-</section>
 
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="py-32 relative overflow-hidden">
+
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500">
+    </div>
+
+    <div
+      class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_left,white,transparent_40%)]">
+    </div>
+
+    <div class="relative max-w-5xl mx-auto px-6 text-center">
+
+      <h3 class="text-5xl md:text-6xl font-black text-white leading-tight">
+        Start Building
+        <br />
+        Modern RTC Systems
+      </h3>
+
+      <p
+        class="mt-8 text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
+
+        Learn WebRTC, SFU scaling, media routing,
+        and real-world RTC infrastructure engineering.
+
+      </p>
+
+      <div class="mt-12 flex flex-wrap justify-center gap-5">
+
+        <a href="#"
+          class="px-8 py-4 rounded-2xl bg-white text-slate-900 font-semibold hover:scale-105 transition duration-300 shadow-2xl">
+
+          Explore Articles
+
+        </a>
+
+        <a href="#"
+          class="px-8 py-4 rounded-2xl border border-white/40 text-white hover:bg-white/10 transition">
+
+          Open GitHub
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-      <p>© 2026 RTCView. Open knowledge for real-time communication.</p>
-      <div class="flex gap-6 mt-4 md:mt-0">
-        <a href="https://github.com/rtcview" class="hover:text-primary">GitHub</a>
-        <a href="#" class="hover:text-primary">Twitter</a>
-        <a href="#" class="hover:text-primary">Contact</a>
+  <footer class="border-t border-slate-200 bg-white">
+
+    <div class="max-w-7xl mx-auto px-6 py-20">
+
+      <div class="grid md:grid-cols-4 gap-12">
+
+        <!-- Brand -->
+        <div>
+
+          <div class="flex items-center gap-3">
+
+            <div
+              class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-bold">
+              R
+            </div>
+
+            <h3 class="text-2xl font-black">
+              RTC<span class="text-primary">View</span>
+            </h3>
+
+          </div>
+
+          <p class="mt-6 text-slate-600 leading-relaxed">
+            Advanced real-time communication engineering platform
+            focused on WebRTC, SFU, VoIP, and scalable RTC infrastructure.
+          </p>
+
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="font-bold text-lg">Platform</h4>
+
+          <div class="mt-6 flex flex-col gap-4 text-slate-600">
+
+            <a href="#" class="hover:text-primary transition">Articles</a>
+            <a href="#" class="hover:text-primary transition">Projects</a>
+            <a href="#" class="hover:text-primary transition">Architecture</a>
+            <a href="#" class="hover:text-primary transition">Docs</a>
+
+          </div>
+        </div>
+
+        <!-- Technologies -->
+        <div>
+          <h4 class="font-bold text-lg">Technologies</h4>
+
+          <div class="mt-6 flex flex-col gap-4 text-slate-600">
+
+            <a href="#" class="hover:text-primary transition">WebRTC</a>
+            <a href="#" class="hover:text-primary transition">SIP</a>
+            <a href="#" class="hover:text-primary transition">RTP</a>
+            <a href="#" class="hover:text-primary transition">SFU</a>
+
+          </div>
+        </div>
+
+        <!-- Community -->
+        <div>
+          <h4 class="font-bold text-lg">Community</h4>
+
+          <div class="mt-6 flex flex-col gap-4 text-slate-600">
+
+            <a href="#" class="hover:text-primary transition">GitHub</a>
+            <a href="#" class="hover:text-primary transition">Twitter</a>
+            <a href="#" class="hover:text-primary transition">Discord</a>
+            <a href="#" class="hover:text-primary transition">Contact</a>
+
+          </div>
+        </div>
+
       </div>
+
+      <div
+        class="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-5">
+
+        <p class="text-slate-500 text-sm">
+          © 2026 RTCView. Built for modern RTC engineers.
+        </p>
+
+        <div class="flex items-center gap-6 text-sm text-slate-500">
+
+          <a href="#" class="hover:text-primary transition">
+            Privacy
+          </a>
+
+          <a href="#" class="hover:text-primary transition">
+            Terms
+          </a>
+
+          <a href="#" class="hover:text-primary transition">
+            Contact
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
+
   </footer>
 
 </body>
+
 </html>
