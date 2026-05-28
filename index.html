@@ -216,57 +216,269 @@
         </div>
 
         <!-- Right -->
-        <div class="relative">
+    
+<!-- Right -->
+<div class="relative">
 
-          <div
-            class="rounded-[32px] bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden">
+  <!-- Container -->
+  <div
+    class="relative rounded-[32px] border border-slate-200 bg-white shadow-2xl overflow-hidden">
 
-            <!-- Top -->
-            <div
-              class="px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+    <!-- Header -->
+    <div
+      class="flex items-center justify-between px-8 py-6 border-b border-slate-100 bg-white">
 
-              <div class="w-3 h-3 rounded-full bg-red-400"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+      <div>
 
-              <div class="ml-4 text-slate-400 text-sm">
-                rtc-cluster.yaml
-              </div>
+        <p class="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+          Trending Knowledge
+        </p>
 
-            </div>
+        <h3 class="mt-2 text-2xl font-black text-slate-900">
+          Top RTC Articles
+        </h3>
 
-            <!-- Code -->
-            <div class="p-8 overflow-x-auto">
+      </div>
 
-<pre class="text-sm leading-8 text-slate-300">
-global:
-  region: asia-south
+      <!-- Live Badge -->
+      <div
+        class="flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-100">
 
-cluster:
-  signaling:
-    replicas: 4
+        <div
+          class="w-2 h-2 rounded-full bg-green-500 animate-pulse">
+        </div>
 
-  turn:
-    provider: coturn
+        <span class="text-sm font-semibold text-green-700">
+          Live
+        </span>
 
-  sfu:
-    engine: mediasoup
-    autoscaling: enabled
+      </div>
 
-  recording:
-    storage: s3
+    </div>
 
-  monitoring:
-    metrics: prometheus
-    logs: grafana
-</pre>
+    <!-- Articles -->
+    <div class="relative h-[620px] overflow-hidden">
 
-            </div>
+      <!-- Gradient Top -->
+      <div
+        class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none">
+      </div>
+
+      <!-- Gradient Bottom -->
+      <div
+        class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none">
+      </div>
+
+      <!-- Scroll Wrapper -->
+      <div
+        class="absolute inset-0 overflow-y-auto px-6 py-6 space-y-5 article-scroll">
+
+        <!-- Article Card -->
+        <a href="#"
+          class="group block p-6 rounded-3xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50/40 transition duration-300">
+
+          <div class="flex items-center justify-between">
+
+            <span
+              class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase">
+              WebRTC
+            </span>
+
+            <span class="text-sm text-slate-500">
+              12 min read
+            </span>
 
           </div>
 
-        </div>
+          <h4
+            class="mt-5 text-2xl font-black leading-tight text-slate-900 group-hover:text-blue-600 transition">
 
+            How SFU Scaling Works
+            in Large Group Calls
+
+          </h4>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Deep dive into media routing,
+            RTP forwarding, simulcast,
+            and distributed SFU scaling strategies.
+          </p>
+
+        </a>
+
+        <!-- Article Card -->
+        <a href="#"
+          class="group block p-6 rounded-3xl border border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/40 transition duration-300">
+
+          <div class="flex items-center justify-between">
+
+            <span
+              class="px-3 py-1 rounded-full bg-cyan-100 text-cyan-700 text-xs font-bold uppercase">
+              RTP
+            </span>
+
+            <span class="text-sm text-slate-500">
+              18 min read
+            </span>
+
+          </div>
+
+          <h4
+            class="mt-5 text-2xl font-black leading-tight text-slate-900 group-hover:text-cyan-600 transition">
+
+            RTP Packet Flow
+            Explained Visually
+
+          </h4>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Understand RTP streams,
+            jitter buffering, packet timing,
+            RTCP feedback, and media synchronization.
+          </p>
+
+        </a>
+
+        <!-- Article Card -->
+        <a href="#"
+          class="group block p-6 rounded-3xl border border-slate-200 hover:border-violet-300 hover:bg-violet-50/40 transition duration-300">
+
+          <div class="flex items-center justify-between">
+
+            <span
+              class="px-3 py-1 rounded-full bg-violet-100 text-violet-700 text-xs font-bold uppercase">
+              VoIP
+            </span>
+
+            <span class="text-sm text-slate-500">
+              9 min read
+            </span>
+
+          </div>
+
+          <h4
+            class="mt-5 text-2xl font-black leading-tight text-slate-900 group-hover:text-violet-600 transition">
+
+            SIP Signaling
+            Architecture Guide
+
+          </h4>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Learn INVITE flows,
+            registration systems,
+            PSTN gateways, and telecom-grade signaling.
+          </p>
+
+        </a>
+
+        <!-- Article Card -->
+        <a href="#"
+          class="group block p-6 rounded-3xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/40 transition duration-300">
+
+          <div class="flex items-center justify-between">
+
+            <span
+              class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase">
+              TURN
+            </span>
+
+            <span class="text-sm text-slate-500">
+              15 min read
+            </span>
+
+          </div>
+
+          <h4
+            class="mt-5 text-2xl font-black leading-tight text-slate-900 group-hover:text-emerald-600 transition">
+
+            TURN Servers
+            at Global Scale
+
+          </h4>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Real-world TURN deployment,
+            bandwidth optimization,
+            relay networking, and scaling patterns.
+          </p>
+
+        </a>
+
+        <!-- Article Card -->
+        <a href="#"
+          class="group block p-6 rounded-3xl border border-slate-200 hover:border-orange-300 hover:bg-orange-50/40 transition duration-300">
+
+          <div class="flex items-center justify-between">
+
+            <span
+              class="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold uppercase">
+              Architecture
+            </span>
+
+            <span class="text-sm text-slate-500">
+              20 min read
+            </span>
+
+          </div>
+
+          <h4
+            class="mt-5 text-2xl font-black leading-tight text-slate-900 group-hover:text-orange-600 transition">
+
+            Designing
+            Distributed RTC Systems
+
+          </h4>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Learn microservices,
+            media pipelines,
+            autoscaling, observability,
+            and fault-tolerant RTC infrastructure.
+          </p>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+
+.article-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Auto Scroll Animation */
+@media (min-width: 1024px) {
+
+  .article-scroll {
+    animation: autoScroll 25s linear infinite;
+  }
+
+  .article-scroll:hover {
+    animation-play-state: paused;
+  }
+
+}
+
+@keyframes autoScroll {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-45%);
+  }
+
+}
+
+</style>
       </div>
 
     </div>
