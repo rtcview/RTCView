@@ -1,601 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RTCView | P2P Call</title>
-
-<meta name="theme-color" content="#08B1D6">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<script>
-
-tailwind.config = {
-theme:{
-extend:{
-fontFamily:{
-sans:['Inter','sans-serif']
-},
-colors:{
-primary:"#2563EB",
-secondary:"#06B6D4",
-surface:"#F8FAFC",
-border:"#E2E8F0"
-}
-}
-}
-}
-
-</script>
-
-<style>
-
-body{
-
-background:#f8fafc;
-
-}
-
-.video-card{
-
-background:
-linear-gradient(135deg,#0f172a,#111827);
-
-}
-
-.video-placeholder{
-
-background:
-radial-gradient(circle at center,#334155,#0f172a);
-
-}
-
-.glass{
-
-backdrop-filter:blur(16px);
-
-background:rgba(255,255,255,.88);
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTC Demo Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f5f9;
+      color: #222;
+    }
+    header {
+      background: #0a74da;
+      color: #fff;
+      padding: 32px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2.2rem;
+    }
+    header p {
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 20px 40px;
+    }
+    .demo-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .demo-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(13, 40, 71, 0.08);
+      margin-bottom: 18px;
+      padding: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .demo-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(13, 40, 71, 0.16);
+    }
+    .demo-item a {
+      color: #0a74da;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .demo-item p {
+      margin: 8px 0 0;
+      color: #555;
+      line-height: 1.5;
+    }
+    .note {
+      margin-top: 28px;
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
-
-<body class="font-sans text-slate-900">
-
-<!-- Navbar -->
-
-<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-xl">
-
-<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-
-<div class="flex items-center gap-3">
-
-<div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-bold">
-
-R
-
-</div>
-
-<div>
-
-<h1 class="font-black text-2xl">
-
-RTC<span class="text-primary">View</span>
-
-</h1>
-
-<p class="text-xs text-slate-500">
-
-P2P WebRTC Playground
-
-</p>
-
-</div>
-
-</div>
-
-<div class="hidden lg:flex items-center gap-8 text-sm">
-
-<a href="#" class="hover:text-primary">Articles</a>
-
-<a href="#" class="hover:text-primary">Docs</a>
-
-<a href="#" class="hover:text-primary">GitHub</a>
-
-</div>
-
-<div
-class="flex items-center gap-3 px-4 py-2 rounded-full bg-green-50 border border-green-200">
-
-<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-
-<span class="text-sm font-semibold text-green-700">
-
-Ready
-
-</span>
-
-</div>
-
-</div>
-
-</header>
-
-<!-- Main -->
-
-<main class="max-w-7xl mx-auto px-5 py-8">
-
-<!-- Heading -->
-
-<div class="flex flex-col lg:flex-row justify-between gap-8 mb-8">
-
-<div>
-
-<p class="text-primary font-semibold">
-
-WEBRTC PLAYGROUND
-
-</p>
-
-<h2 class="text-5xl font-black mt-3">
-
-Peer-to-Peer Video Call
-
-</h2>
-
-<p class="text-slate-600 mt-4 max-w-3xl">
-
-Experiment with native WebRTC APIs, signaling,
-ICE negotiation, SDP exchange,
-media tracks and real-time diagnostics.
-
-</p>
-
-</div>
-
-<!-- Connection -->
-
-<div
-class="glass rounded-3xl border border-slate-200 p-6 shadow-xl min-w-[260px]">
-
-<div class="flex justify-between">
-
-<span class="text-slate-500">
-
-Connection
-
-</span>
-
-<span class="text-green-600 font-bold">
-
-Connected
-
-</span>
-
-</div>
-
-<div class="mt-6">
-
-<p class="text-slate-500 text-sm">
-
-Call Duration
-
-</p>
-
-<h3 class="text-4xl font-black mt-2">
-
-00:00
-
-</h3>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Video Area -->
-
-<div class="grid lg:grid-cols-12 gap-8">
-
-<!-- Left -->
-
-<div class="lg:col-span-8">
-
-<div
-class="video-card rounded-[34px] overflow-hidden relative shadow-2xl border border-slate-800">
-
-<!-- Header -->
-
-<div
-class="absolute top-0 left-0 right-0 z-20 flex justify-between items-center p-6">
-
-<div
-class="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white">
-
-Remote User
-
-</div>
-
-<button
-class="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md text-white">
-
-⛶
-
-</button>
-
-</div>
-
-<!-- Video -->
-
-<div
-class="video-placeholder h-[620px] flex flex-col items-center justify-center">
-
-<div
-class="w-28 h-28 rounded-full bg-slate-700 flex items-center justify-center text-5xl">
-
-👤
-
-</div>
-
-<h3 class="text-white text-3xl font-bold mt-8">
-
-Waiting for Peer...
-
-</h3>
-
-<p class="text-slate-300 mt-4">
-
-Share your room code to start.
-
-</p>
-
-</div>
-
-<!-- Floating Local Video -->
-
-<div
-class="absolute bottom-8 right-8 w-64 h-40 rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-slate-900">
-
-<div
-class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/50 text-xs text-white">
-
-You
-
-</div>
-
-<div
-class="h-full flex flex-col justify-center items-center bg-gradient-to-br from-slate-700 to-slate-900">
-
-<div
-class="w-16 h-16 rounded-full bg-slate-600 flex items-center justify-center text-3xl">
-
-🙂
-
-</div>
-
-<p class="text-white mt-4">
-
-Camera Preview
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Right Sidebar -->
-
-<div class="lg:col-span-4 space-y-6">
-
-<div
-class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
-
-<div class="flex justify-between">
-
-<h3 class="font-bold text-xl">
-
-Session
-
-</h3>
-
-<div
-class="w-3 h-3 rounded-full bg-green-500 animate-pulse">
-
-</div>
-
-</div>
-
-<div class="mt-6 space-y-4">
-
-<div class="flex justify-between">
-
-<span class="text-slate-500">
-
-ICE
-
-</span>
-
-<span class="text-green-600 font-semibold">
-
-Connected
-
-</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-500">
-
-DTLS
-
-</span>
-
-<span class="text-green-600 font-semibold">
-
-Connected
-
-</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-500">
-
-Signaling
-
-</span>
-
-<span class="text-blue-600 font-semibold">
-
-Stable
-
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- next -->
-
-<!-- Generate Room -->
-<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
-
-    <div class="flex items-center justify-between">
-        <h3 class="text-xl font-bold">
-            Generate Room
-        </h3>
-
-        <button
-            class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 transition">
-            🔄
-        </button>
+<body>
+  <header>
+    <h1>RTC Demo Playground</h1>
+    <p>Select a demo to explore real-time communication features in the playground.</p>
+  </header>
+  <main>
+    <ul class="demo-list">
+      <li class="demo-item">
+        <a href="demo1.html">Basic Video Call</a>
+        <p>A one-to-one video communication example with local and remote streams.</p>
+      </li>
+      <li class="demo-item">
+        <a href="demo2.html">Screen Sharing</a>
+        <p>Share your screen in real time and view the shared display.</p>
+      </li>
+      <li class="demo-item">
+        <a href="demo3.html">Multi-User Room</a>
+        <p>Join a room with multiple participants and see live streams from everyone.</p>
+      </li>
+      <li class="demo-item">
+        <a href="demo4.html">Data Channel Chat</a>
+        <p>Send messages and control events between peers using WebRTC data channels.</p>
+      </li>
+      <li class="demo-item">
+        <a href="demo5.html">Audio Only Call</a>
+        <p>An audio-only session for low-bandwidth communication.</p>
+      </li>
+    </ul>
+    <div class="note">
+      If you have additional demos, add links here using the same structure to keep the home page updated.
     </div>
-
-    <div class="mt-5">
-
-        <label class="text-sm text-slate-500">
-            Room Code
-        </label>
-
-        <div class="mt-2 flex gap-3">
-
-            <input
-                readonly
-                value="RTC-8X2P-Q9KD"
-                class="flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-bold tracking-widest text-center">
-
-            <button
-                class="px-5 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 transition">
-
-                Copy
-
-            </button>
-
-        </div>
-
-        <button
-            class="mt-4 w-full rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3 text-white font-semibold hover:shadow-xl transition">
-
-            Generate New Room
-
-        </button>
-
-    </div>
-
-</div>
-
-<!-- Join Room -->
-<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
-
-    <h3 class="text-xl font-bold">
-
-        Join Existing Room
-
-    </h3>
-
-    <input
-        placeholder="Enter Room Code"
-        class="mt-5 w-full rounded-2xl border border-slate-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-    <button
-        class="mt-4 w-full rounded-2xl bg-slate-900 text-white py-3 font-semibold hover:bg-slate-800 transition">
-
-        Join Room
-
-    </button>
-
-</div>
-
-<!-- Live Statistics -->
-<div class="grid grid-cols-2 gap-4">
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            Bitrate
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            2.8 Mbps
-        </h3>
-
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            Latency
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            24 ms
-        </h3>
-
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            FPS
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            30
-        </h3>
-
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            Codec
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            VP8
-        </h3>
-
-    </div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================================================= -->
-<!-- Action Toolbar -->
-<!-- ================================================= -->
-
-<div
-class="mt-8 bg-white rounded-[32px] border border-slate-200 shadow-xl p-6">
-
-<div class="flex flex-wrap justify-center gap-5">
-
-    <!-- Camera -->
-    <button
-    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">📹</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Camera
-        </p>
-
-    </button>
-
-    <!-- Mic -->
-    <button
-    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">🎤</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Mic
-        </p>
-
-    </button>
-
-    <!-- Switch Camera -->
-    <button
-    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">🔄</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Switch
-        </p>
-
-    </button>
-
-    <!-- Screen Share -->
-    <button
-    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">🖥️</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Share
-        </p>
-
-    </button>
-
-    <!-- Fullscreen -->
-    <button
-    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">⛶</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Full
-        </p>
-
-    </button>
-
-    <!-- Settings -->
-    <button
-    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">⚙️</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Settings
-        </p>
-
-    </button>
-
-    <!-- Hangup -->
-    <button
-    class="group w-24 h-24 rounded-3xl bg-red-500 hover:bg-red-600 text-white transition shadow-lg">
-
-        <div class="text-3xl">📞</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Hang Up
-        </p>
-
-    </button>
-
-</div>
-
-</div>
+  </main>
+</body>
+</html>
