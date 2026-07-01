@@ -144,7 +144,7 @@ Ready
 
 <p class="text-primary font-semibold">
 
-RTC ENGINEERING PLAYGROUND
+WEBRTC PLAYGROUND
 
 </p>
 
@@ -370,6 +370,231 @@ Stable
 </span>
 
 </div>
+
+</div>
+
+</div>
+
+<!-- next -->
+
+<!-- Generate Room -->
+<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
+
+    <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">
+            Generate Room
+        </h3>
+
+        <button
+            class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 transition">
+            🔄
+        </button>
+    </div>
+
+    <div class="mt-5">
+
+        <label class="text-sm text-slate-500">
+            Room Code
+        </label>
+
+        <div class="mt-2 flex gap-3">
+
+            <input
+                readonly
+                value="RTC-8X2P-Q9KD"
+                class="flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-bold tracking-widest text-center">
+
+            <button
+                class="px-5 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 transition">
+
+                Copy
+
+            </button>
+
+        </div>
+
+        <button
+            class="mt-4 w-full rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3 text-white font-semibold hover:shadow-xl transition">
+
+            Generate New Room
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Join Room -->
+<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
+
+    <h3 class="text-xl font-bold">
+
+        Join Existing Room
+
+    </h3>
+
+    <input
+        placeholder="Enter Room Code"
+        class="mt-5 w-full rounded-2xl border border-slate-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+    <button
+        class="mt-4 w-full rounded-2xl bg-slate-900 text-white py-3 font-semibold hover:bg-slate-800 transition">
+
+        Join Room
+
+    </button>
+
+</div>
+
+<!-- Live Statistics -->
+<div class="grid grid-cols-2 gap-4">
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+
+        <p class="text-slate-500 text-sm">
+            Bitrate
+        </p>
+
+        <h3 class="text-2xl font-black mt-2">
+            2.8 Mbps
+        </h3>
+
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+
+        <p class="text-slate-500 text-sm">
+            Latency
+        </p>
+
+        <h3 class="text-2xl font-black mt-2">
+            24 ms
+        </h3>
+
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+
+        <p class="text-slate-500 text-sm">
+            FPS
+        </p>
+
+        <h3 class="text-2xl font-black mt-2">
+            30
+        </h3>
+
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+
+        <p class="text-slate-500 text-sm">
+            Codec
+        </p>
+
+        <h3 class="text-2xl font-black mt-2">
+            VP8
+        </h3>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- Action Toolbar -->
+<!-- ================================================= -->
+
+<div
+class="mt-8 bg-white rounded-[32px] border border-slate-200 shadow-xl p-6">
+
+<div class="flex flex-wrap justify-center gap-5">
+
+    <!-- Camera -->
+    <button
+    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
+
+        <div class="text-3xl">📹</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Camera
+        </p>
+
+    </button>
+
+    <!-- Mic -->
+    <button
+    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
+
+        <div class="text-3xl">🎤</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Mic
+        </p>
+
+    </button>
+
+    <!-- Switch Camera -->
+    <button
+    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
+
+        <div class="text-3xl">🔄</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Switch
+        </p>
+
+    </button>
+
+    <!-- Screen Share -->
+    <button
+    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
+
+        <div class="text-3xl">🖥️</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Share
+        </p>
+
+    </button>
+
+    <!-- Fullscreen -->
+    <button
+    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
+
+        <div class="text-3xl">⛶</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Full
+        </p>
+
+    </button>
+
+    <!-- Settings -->
+    <button
+    class="group w-24 h-24 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
+
+        <div class="text-3xl">⚙️</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Settings
+        </p>
+
+    </button>
+
+    <!-- Hangup -->
+    <button
+    class="group w-24 h-24 rounded-3xl bg-red-500 hover:bg-red-600 text-white transition shadow-lg">
+
+        <div class="text-3xl">📞</div>
+
+        <p class="mt-2 text-sm font-semibold">
+            Hang Up
+        </p>
+
+    </button>
 
 </div>
 
