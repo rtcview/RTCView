@@ -166,7 +166,7 @@ media tracks and real-time diagnostics.
 
 <!-- Connection -->
 
-<!-- <div
+<div
 class="glass rounded-3xl border border-slate-200 p-2 shadow-xl min-w-[260px]">
 
 <div class="flex justify-between">
@@ -201,7 +201,13 @@ Call Duration
 
 </div>
 
-</div> -->
+</div>
+
+
+<!-- Call Action-->
+ 
+
+
 
 </div>
 
@@ -447,75 +453,57 @@ Stable
 
 <!-- next -->
 
-<!-- Generate Room -->
-<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
 
-    <div class="flex items-center justify-between">
-        <h3 class="text-xl font-bold">
-            Generate Room
+<!-- Live Statistics -->
+<div class="grid grid-cols-2 gap-4">
+
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
+
+        <p class="text-slate-500 text-sm">
+            Bitrate
+        </p>
+
+        <h3 class="text-2xl font-black mt-2">
+            2.8 Mbps
         </h3>
 
-        <button
-            class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 transition">
-            🔄
-        </button>
     </div>
 
-    <div class="mt-5">
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
 
-        <label class="text-sm text-slate-500">
-            Room Code
-        </label>
+        <p class="text-slate-500 text-sm">
+            Latency
+        </p>
 
-        <div class="mt-2 flex gap-3">
-
-            <input
-                readonly
-                value="RTC-8X2P-Q9KD"
-                class="flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-bold tracking-widest text-center">
-
-            <button
-                class="px-5 rounded-2xl bg-blue-600 text-white hover:bg-blue-700 transition">
-
-                Copy
-
-            </button>
-
-        </div>
-
-        <button
-            class="mt-4 w-full rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 py-3 text-white font-semibold hover:shadow-xl transition">
-
-            Generate New Room
-
-        </button>
+        <h3 class="text-2xl font-black mt-2">
+            24 ms
+        </h3>
 
     </div>
 
-</div>
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
 
-<!-- Join Room -->
-<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
+        <p class="text-slate-500 text-sm">
+            FPS
+        </p>
 
-    <h3 class="text-xl font-bold">
+        <h3 class="text-2xl font-black mt-2">
+            30
+        </h3>
 
-        Join Existing Room
+    </div>
 
-    </h3>
+    <div class="bg-white rounded-2xl border border-slate-200 p-5">
 
-    <input
-        placeholder="Enter Room Code"
-        class="mt-5 w-full rounded-2xl border border-slate-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <p class="text-slate-500 text-sm">
+            Codec
+        </p>
 
-    <button
-        class="mt-4 w-full rounded-2xl bg-slate-900 text-white py-3 font-semibold hover:bg-slate-800 transition">
+        <h3 class="text-2xl font-black mt-2">
+            VP8
+        </h3>
 
-        Join Room
-
-    </button>
-
-</div>
-
+    </div>
 
 
 </div>
