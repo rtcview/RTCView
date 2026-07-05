@@ -138,7 +138,7 @@ Ready
 
 <!-- Heading -->
 
-<div class="flex flex-col lg:flex-row justify-between gap-8 mb-8 hidden lg:blockx">
+<div class="flex flex-col lg:flex-row justify-between gap-8 mb-8 hidden lg:block">
 
 <div>
 
@@ -154,7 +154,7 @@ Peer-to-Peer Video Call
 
 </h2>
 
-<p class="text-slate-600 mt-2 max-w-3x2">
+<p class="text-slate-600 mt-2 max-w-3x1">
 
 Experiment with native WebRTC APIs, signaling,
 ICE negotiation, SDP exchange,
@@ -164,56 +164,13 @@ media tracks and real-time diagnostics.
 
 </div>
 
+</div>
 <!-- Connection -->
 
-<div
-class="glass rounded-3xl border border-slate-200 p-2 shadow-xl min-w-[260px]">
-
-<div class="flex justify-between">
-
-<span class="text-slate-500">
-
-Connection
-
-</span>
-
-<span class="text-green-600 font-bold">
-
-Connected
-
-</span>
-
-</div>
-
-<div class="mt-6">
-
-<p class="text-slate-500 text-sm">
-
-Call Duration
-
-</p>
-
-<h3 class="text-4xl font-black mt-2">
-
-00:00
-
-</h3>
-
-</div>
-
-</div>
-
-
-<!-- Call Action-->
- 
-
-
-
-</div>
 
 <!-- Video Area -->
 
-<div class="grid lg:grid-cols-12 gap-8">
+<div class="grid  lg:grid-cols-12 gap-8 lg:py-8">
 
 <!-- Left -->
 
@@ -452,6 +409,67 @@ Stable
 </div>
 
 <!-- next -->
+<!-- Room Management -->
+<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-5">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-xl font-semibold text-slate-900">
+                Room
+            </h3>
+            <p class="text-sm text-slate-500">
+                Generate or join a secure meeting.
+            </p>
+        </div>
+
+        <button
+            class="w-10 h-10 rounded-xl border border-slate-200 hover:bg-slate-100 transition">
+            🔄
+        </button>
+    </div>
+
+    <!-- Generated Room -->
+    <div class="flex gap-2 mb-3 overflow-hidden ">
+
+        <input
+            readonly
+            value="RTC-8X2P-Q9KD"
+            class="flex-1 h-11 rounded-xl bg-slate-50 border border-slate-200 px-4 font-semibold tracking-widest text-center">
+
+
+        <button
+            class="px-5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">
+            New
+        </button>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-3 my-3">
+        <div class="flex-1 h-px bg-slate-200"></div>
+        <span class="text-xs text-slate-400 uppercase tracking-wider">
+            OR
+        </span>
+        <div class="flex-1 h-px bg-slate-200"></div>
+    </div>
+
+    <!-- Join Room -->
+    <div class="flex gap-2">
+
+        <input
+            placeholder="Enter room code..."
+            class="flex-1 h-11 rounded-xl border border-slate-200 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <button
+            class="px-6 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition">
+            Join
+        </button>
+
+    </div>
+
+</div>
+
 
 
 <!-- Live Statistics -->
