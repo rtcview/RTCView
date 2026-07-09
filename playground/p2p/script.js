@@ -40,3 +40,5 @@ async function initMedia() {
 
     
 }
+
+initMedia();
