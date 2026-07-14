@@ -41,5 +41,11 @@ async function initMedia() {
 LocalVideo.srcObject =localStream;
     
 }
+// start connection
+async function createPeerConnection() {
+peerConnection = new RTCPeerConnection(servers);
+}
+
+
 
 initMedia();
