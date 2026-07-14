@@ -38,7 +38,7 @@ async function initMedia() {
     audio: true,
  });
 
-localStream.srcObject =localStream;
+LocalVideo.srcObject =localStream;
     
 }
 
