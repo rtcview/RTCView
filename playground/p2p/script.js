@@ -42,11 +42,11 @@ LocalVideo.srcObject =localStream;
     
 }
 // start connection
-async function createPeerConnection() {
-peerConnection = RTCPeerConnection(servers);
-localStream.getTracks().forEach(track => {
-peerConnection.addTrack(track, localStream);
-})
+
+async function createPeerConnection(){
+peerConnection = new RTCPeerConnection(servers);
+
+  
 
 }
 
