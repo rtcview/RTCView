@@ -6,64 +6,195 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RTCView | P2P Call</title>
+<title>RTCView | WebRTC Playground</title>
 
-<meta name="theme-color" content="#08B1D6">
+<meta name="theme-color" content="#0f172a">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <script>
 
 tailwind.config = {
-theme:{
-extend:{
-fontFamily:{
-sans:['Inter','sans-serif']
+
+theme: {
+
+extend: {
+
+fontFamily: {
+
+sans: ['Inter', 'sans-serif'],
+
+mono: ['JetBrains Mono', 'monospace']
+
 },
-colors:{
-primary:"#2563EB",
-secondary:"#06B6D4",
-surface:"#F8FAFC",
-border:"#E2E8F0"
+
+colors: {
+
+primary: "#2563EB"
+
 }
+
 }
+
 }
+
 }
 
 </script>
 
+
 <style>
 
+*{
+box-sizing:border-box;
+}
+
+html,
 body{
+margin:0;
+height:100%;
+}
 
+body{
 background:#f8fafc;
-
 }
 
-.video-card{
+.mono{
+font-family:'JetBrains Mono',monospace;
+}
+
+.video-area{
 
 background:
-linear-gradient(135deg,#0f172a,#111827);
+radial-gradient(
+circle at center,
+#263449 0%,
+#111827 55%,
+#080d16 100%
+);
 
 }
 
-.video-placeholder{
+.video-grid{
 
-background:
-radial-gradient(circle at center,#334155,#0f172a);
+background-image:
+linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+
+background-size:40px 40px;
 
 }
 
-.glass{
+.stat-card{
 
-backdrop-filter:blur(16px);
+background:#fff;
 
-background:rgba(255,255,255,.88);
+border:1px solid #e5e7eb;
+
+border-radius:12px;
+
+}
+
+.status-dot{
+
+width:7px;
+
+height:7px;
+
+border-radius:50%;
+
+}
+
+.control{
+
+width:40px;
+
+height:40px;
+
+border-radius:10px;
+
+border:1px solid #334155;
+
+background:#1e293b;
+
+color:white;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+transition:.15s;
+
+}
+
+.control:hover{
+
+background:#334155;
+
+}
+
+.panel{
+
+background:#fff;
+
+border:1px solid #e2e8f0;
+
+border-radius:14px;
+
+}
+
+.section-title{
+
+font-size:11px;
+
+font-weight:700;
+
+letter-spacing:.08em;
+
+text-transform:uppercase;
+
+color:#64748b;
+
+}
+
+@media(min-width:1024px){
+
+main{
+
+height:calc(100vh - 62px);
+
+overflow:hidden;
+
+}
+
+.video-container{
+
+height:calc(100vh - 265px);
+
+min-height:330px;
+
+max-height:430px;
+
+}
+
+}
+
+@media(min-width:1024px) and (max-height:800px){
+
+.video-container{
+
+height:330px;
+
+}
 
 }
 
@@ -71,17 +202,25 @@ background:rgba(255,255,255,.88);
 
 </head>
 
+
 <body class="font-sans text-slate-900">
 
-<!-- Navbar -->
 
-<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-xl">
 
-<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+<!-- NAVBAR -->
 
-<div class="flex items-center gap-3">
 
-<div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center font-bold">
+<header class="h-[62px] bg-white border-b border-slate-200">
+
+<div class="max-w-7xl h-full mx-auto px-5 flex items-center justify-between">
+
+
+<!-- Brand -->
+
+<div class="flex items-center gap-2.5">
+
+<div
+class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-sm">
 
 R
 
@@ -89,41 +228,54 @@ R
 
 <div>
 
-<h1 class="font-black text-2xl">
+<div class="font-bold text-lg tracking-tight leading-none">
 
-RTC<span class="text-primary">View</span>
+RTC<span class="text-blue-600">View</span>
 
-</h1>
+</div>
 
-<p class="text-xs text-slate-500">
+<div class="text-[9px] text-slate-400 mt-1">
 
-P2P WebRTC Playground
-
-</p>
+WebRTC Playground
 
 </div>
 
 </div>
 
-<div class="hidden lg:flex items-center gap-8 text-sm">
+</div>
 
-<a href="#" class="hover:text-primary">Articles</a>
 
-<a href="#" class="hover:text-primary">Docs</a>
+<!-- Navigation -->
 
-<a href="#" class="hover:text-primary">GitHub</a>
+<div class="hidden md:flex items-center gap-6 text-xs text-slate-500">
+
+<a href="#" class="hover:text-slate-900">
+Playground
+</a>
+
+<a href="#" class="hover:text-slate-900">
+Diagnostics
+</a>
+
+<a href="#" class="hover:text-slate-900">
+Docs
+</a>
+
+<a href="#" class="hover:text-slate-900">
+GitHub
+</a>
 
 </div>
 
-<div
-class="flex items-center gap-3 px-4 py-2 rounded-full bg-green-50 border border-green-200">
 
-<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<!-- Status -->
 
-<span class="text-sm font-semibold text-green-700">
+<div class="flex items-center gap-2">
 
+<div class="status-dot bg-emerald-500"></div>
+
+<span class="text-xs font-medium text-emerald-600">
 Ready
-
 </span>
 
 </div>
@@ -132,407 +284,830 @@ Ready
 
 </header>
 
-<!-- Main -->
-
-<main class="max-w-7xl mx-auto px-5 py-8">
-
-<!-- Heading -->
-
-<div class="flex flex-col lg:flex-row justify-between gap-8 mb-8 hidden lg:block">
-
-<div>
-
-<p class="text-primary font-semibold">
-
-WEBRTC PLAYGROUND
-
-</p>
-
-<h2 class="text-5xl font-black mt-1">
-
-Peer-to-Peer Video Call
-
-</h2>
-
-<p class="text-slate-600 mt-2 max-w-3xl">
-
-Experiment with native WebRTC APIs, signaling,
-ICE negotiation, SDP exchange,
-media tracks and real-time diagnostics.
-
-</p>
-
-</div>
-
-</div>
-<!-- Connection -->
 
 
-<!-- Video Area -->
+<!-- ===================================================== -->
+<!-- MAIN -->
+<!-- ===================================================== -->
 
-<div class="grid  lg:grid-cols-12 gap-8 lg:py-0">
+<main class="max-w-7xl mx-auto px-5 py-4">
 
-<!-- Left -->
-
-<div class="lg:col-span-8">
-
-<div
-class="video-card rounded-[34px] overflow-hidden relative shadow-2xl border border-slate-800">
 
 <!-- Header -->
 
+<div class="mb-3">
+
+<div class="flex items-center gap-2">
+
+<span class="section-title text-blue-600">
+WebRTC Playground
+</span>
+
+<span class="text-slate-300">
+/
+</span>
+
+<span class="text-[10px] text-slate-400">
+P2P Video Call
+</span>
+
+</div>
+
+<h1 class="text-2xl font-bold tracking-tight mt-1">
+
+Peer-to-Peer Video Call
+
+</h1>
+
+<p class="text-xs text-slate-500 mt-1">
+
+Native WebRTC API testing environment.
+
+</p>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- MAIN GRID -->
+<!-- ===================================================== -->
+
+<div class="grid lg:grid-cols-12 gap-4">
+
+
+<!-- ===================================================== -->
+<!-- VIDEO -->
+<!-- ===================================================== -->
+
+<section class="lg:col-span-7">
+
+
 <div
-class="absolute top-0 left-0 right-0 z-20 flex justify-between items-center p-6">
+class="video-container relative overflow-hidden rounded-2xl bg-slate-950 border border-slate-800 shadow-sm">
 
-<!-- <div
-class="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white">
 
-Remote User
+<!-- Grid -->
 
-</div> -->
+<div class="video-grid absolute inset-0 opacity-60"></div>
+
+
+<!-- Remote Video -->
+
+<video
+id="RemoteVideo"
+autoplay
+playsinline
+class="absolute inset-0 w-full h-full object-cover z-10">
+</video>
+
+
+<!-- Waiting -->
+
+<div
+id="remotePlaceholder"
+class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center">
+
+
+<div
+class="w-16 h-16 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-2xl">
+
+⌁
+
+</div>
+
+<h2 class="text-white font-semibold mt-4 text-lg">
+
+Waiting for peer
+
+</h2>
+
+<p class="text-slate-400 text-xs mt-1">
+
+Create or join a room to establish a connection.
+
+</p>
+
+</div>
+
+
+<!-- Top Info -->
+
+<div
+class="absolute top-3 left-3 right-3 z-30 flex justify-between items-center">
+
+
+<div
+class="px-2.5 py-1.5 rounded-lg bg-black/50 backdrop-blur text-[10px] text-slate-200 mono">
+
+REMOTE
+
+</div>
+
+
+<div
+class="px-2.5 py-1.5 rounded-lg bg-black/50 backdrop-blur text-[10px] text-slate-300 mono">
+
+WebRTC
+
+</div>
+
+</div>
+
+
+<!-- Local Preview -->
+
+<div
+class="absolute z-30 right-3 bottom-16 w-32 h-20 rounded-xl overflow-hidden border border-white/20 bg-slate-900 shadow-xl">
+
+<video
+id="LocalVideo"
+autoplay
+muted
+playsinline
+class="w-full h-full object-cover">
+</video>
+
+<div
+class="absolute bottom-0 left-0 right-0 bg-black/60 px-2 py-1 text-[9px] text-white mono">
+
+LOCAL
+
+</div>
+
+</div>
+
+
+<!-- Controls -->
+
+<div
+class="absolute bottom-0 left-0 right-0 z-40 bg-slate-950/95 border-t border-white/5 px-4 py-2.5">
+
+<div class="flex justify-center items-center gap-2">
+
 
 <button
-class="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md text-white absolute top-6 right-6 flex items-center justify-center hover:bg-white/20 transition">
+id="cameraBtn"
+class="control"
+title="Camera">
 
-⛶
+📹
+
+</button>
+
+
+<button
+id="micBtn"
+class="control"
+title="Microphone">
+
+🎤
+
+</button>
+
+
+<button
+id="screenBtn"
+class="control"
+title="Screen Share">
+
+▣
+
+</button>
+
+
+<button
+id="switchCameraBtn"
+class="control"
+title="Switch Camera">
+
+↻
+
+</button>
+
+
+<div class="w-px h-6 bg-slate-700 mx-2"></div>
+
+
+<button
+id="hangupBtn"
+class="w-10 h-10 rounded-lg bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition">
+
+☎
 
 </button>
 
 </div>
 
-<!-- Video -->
-
-<div
-class="video-placeholder h-[620px] flex flex-col items-center justify-center">
-
-<div
-class="w-28 h-28 rounded-full bg-slate-700 flex items-center justify-center text-5xl">
-
-👤
-
-</div>
-
-<h3 class="text-white text-3xl font-bold mt-8">
-
-Waiting for Peer...
-<video id="RemoteVideo" ></video>
-
-</h3>
-
-<p class="text-slate-300 mt-4">
-
-Share your room code to start.
-
-</p>
-
-</div>
-
-
-<!-- ================================================= -->
-<!-- Action Toolbar -->
-<!-- ================================================= -->
-
-<div
-class="mt-0 bg-transparent rounded-[32px] border border-transparent shadow-xl p-6">
-
-<div class="flex flex-wrap justify-center md:justify-start gap-3">
-
-    <!-- Camera -->
-    <button
-    class="group w-11 h-11 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">📹</div>
-
-        <p class="mt-2 text-sm font-semibold">
-            Camera
-        </p>
-
-    </button>
-
-    <!-- Mic -->
-    <button
-    class="group w-11 h-11 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">🎤</div>
-
-      
-
-    </button>
-
-    <!-- Switch Camera -->
-    <button
-    class="group w-11 h-11 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">🔄</div>
-
-        
-    </button>
-
-    <!-- Screen Share -->
-    <button
-    class="group w-12 h-12 rounded-3xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition">
-
-        <div class="text-3xl">🖥️</div>
-
-        
-
-    </button>
-
-    <!-- Fullscreen -->
-    
-    <!-- Settings -->
-   
-    <!-- Hangup -->
-    <button
-    class="group w-12 h-12 rounded-3xl bg-red-500 hover:bg-red-600 text-white transition shadow-lg">
-
-        <div class="text-3xl">📞</div>
-
-        <!-- <p class="mt-2 text-sm font-semibold">
-            Hang Up
-        </p> -->
-
-    </button>
-
-</div>
-
-</div>
-<!-- Floating Local Video -->
-
-<div
-class="absolute top-8 right-[28%] md:top-auto md:bottom-8 md:right-8 w-64 h-40 rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-slate-900">
-
-<div
-class="absolute top-0 left-0 px-0 py-1 h-auto bg-black/50 text-xs text-white  md:block">
-
-
-<video id="LocalVideo" autoplay muted playsinline></video>
-
-</div>
-
-<div
-class="h-full flex flex-col justify-center items-center bg-gradient-to-br from-slate-700 to-slate-900">
-
-<div
-class="w-16 h-16 rounded-full bg-slate-600 flex items-center justify-center text-3xl">
-
-🙂
-
-</div>
-
-<p class="text-white mt-4">
-
-Camera Preview
-
-</p>
-
 </div>
 
 </div>
 
-</div>
 
-</div>
+<!-- Connection strip -->
 
-<!-- Right Sidebar -->
+<div class="flex items-center justify-between mt-2 px-1">
 
-<div class="lg:col-span-4 space-y-6">
-
-<div
-class="bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
-
-<div class="flex justify-between">
-
-<h3 class="font-bold text-xl">
-
-Session
-
-</h3>
-
-<div
-class="w-3 h-3 rounded-full bg-green-500 animate-pulse">
-
-</div>
-
-</div>
-
-<div class="mt-6 space-y-4">
-
-<div class="flex justify-between">
+<div class="flex items-center gap-4 text-[10px] mono">
 
 <span class="text-slate-500">
+ICE:
+<span id="iceState" class="text-emerald-600">
+new
+</span>
+</span>
 
+<span class="text-slate-500">
+DTLS:
+<span id="dtlsState" class="text-slate-600">
+new
+</span>
+</span>
+
+<span class="text-slate-500">
+SIGNAL:
+<span id="signalState" class="text-slate-600">
+stable
+</span>
+</span>
+
+</div>
+
+<div class="text-[10px] text-slate-400 mono">
+
+P2P
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+<!-- RIGHT SIDEBAR -->
+
+
+<section class="lg:col-span-5 space-y-3">
+
+<!-- CONNECTION -->
+
+
+<div class="panel p-3.5">
+
+<div class="flex items-center justify-between mb-3">
+
+<h2 class="section-title">
+Connection
+</h2>
+
+<span
+id="connectionBadge"
+class="px-2 py-1 rounded-md bg-slate-100 text-[9px] font-semibold text-slate-500 mono">
+
+NEW
+
+</span>
+
+</div>
+
+
+<div class="grid grid-cols-3 gap-2">
+
+
+<div class="bg-slate-50 rounded-lg p-2">
+
+<div class="text-[9px] text-slate-400">
 ICE
+</div>
 
-</span>
+<div
+id="iceConnection"
+class="text-xs font-semibold text-emerald-600 mt-1">
 
-<span class="text-green-600 font-semibold">
-
-Connected
-
-</span>
+New
 
 </div>
 
-<div class="flex justify-between">
+</div>
 
-<span class="text-slate-500">
 
+<div class="bg-slate-50 rounded-lg p-2">
+
+<div class="text-[9px] text-slate-400">
 DTLS
+</div>
 
-</span>
+<div
+id="dtlsConnection"
+class="text-xs font-semibold text-slate-600 mt-1">
 
-<span class="text-green-600 font-semibold">
-
-Connected
-
-</span>
+New
 
 </div>
 
-<div class="flex justify-between">
+</div>
 
-<span class="text-slate-500">
 
-Signaling
+<div class="bg-slate-50 rounded-lg p-2">
 
-</span>
+<div class="text-[9px] text-slate-400">
+SIGNALING
+</div>
 
-<span class="text-blue-600 font-semibold">
+<div
+id="signalingConnection"
+class="text-xs font-semibold text-blue-600 mt-1">
 
 Stable
 
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- ROOM -->
+<!-- ===================================================== -->
+
+<div class="panel p-3.5">
+
+<div class="flex items-center justify-between mb-3">
+
+<div>
+
+<h2 class="section-title">
+Room
+</h2>
+
+<p class="text-[10px] text-slate-400 mt-1">
+Signaling session
+</p>
+
+</div>
+
+<button
+id="newRoomBtn"
+class="text-[10px] font-semibold text-blue-600 hover:text-blue-700">
+
++ New room
+
+</button>
+
+</div>
+
+
+<div class="flex gap-2">
+
+<input
+id="roomCode"
+readonly
+value="RTC-8X2P-Q9KD"
+class="flex-1 h-9 rounded-lg bg-slate-50 border border-slate-200 px-3 text-xs mono font-medium text-center">
+
+
+<button
+id="copyRoomBtn"
+class="px-3 h-9 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs">
+
+Copy
+
+</button>
+
+</div>
+
+
+<div class="flex gap-2 mt-2">
+
+<input
+id="joinRoomInput"
+placeholder="Enter room code"
+class="flex-1 h-9 rounded-lg border border-slate-200 px-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+
+<button
+id="joinRoomBtn"
+class="px-4 h-9 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium">
+
+Join
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- RTC STATS -->
+<!-- ===================================================== -->
+
+<div class="panel p-3.5">
+
+<div class="flex items-center justify-between mb-3">
+
+<h2 class="section-title">
+RTC Diagnostics
+</h2>
+
+<span class="text-[9px] text-slate-400 mono">
+getStats()
 </span>
 
 </div>
 
+
+<div class="grid grid-cols-2 gap-2">
+
+
+<div class="stat-card p-2.5">
+
+<div class="text-[9px] text-slate-400">
+BITRATE
 </div>
 
-</div>
+<div
+id="bitrate"
+class="text-sm font-semibold mono mt-1">
 
-<!-- next -->
-<!-- Room Management -->
-<div class="bg-white rounded-3xl border border-slate-200 shadow-lg p-5">
-
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-4">
-        <div>
-            <h3 class="text-xl font-semibold text-slate-900">
-                Room
-            </h3>
-            <p class="text-sm text-slate-500">
-                Generate or join a secure meeting.
-            </p>
-        </div>
-
-        <button
-            class="w-10 h-10 rounded-xl border border-slate-200 hover:bg-slate-100 transition">
-            🔄
-        </button>
-    </div>
-
-    <!-- Generated Room -->
-    <div class="flex gap-2 mb-3 overflow-hidden ">
-
-        <input
-            readonly
-            value="RTC-8X2P-Q9KD"
-            class="flex-1 h-11 rounded-xl bg-slate-50 border border-slate-200 px-4 font-semibold tracking-widest text-center">
-
-
-        <button
-            class="px-5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">
-            New
-        </button>
-
-    </div>
-
-    <!-- Divider -->
-    <div class="flex items-center gap-3 my-3">
-        <div class="flex-1 h-px bg-slate-200"></div>
-        <span class="text-xs text-slate-400 uppercase tracking-wider">
-            OR
-        </span>
-        <div class="flex-1 h-px bg-slate-200"></div>
-    </div>
-
-    <!-- Join Room -->
-    <div class="flex gap-2">
-
-        <input
-            placeholder="Enter room code..."
-            class="flex-1 h-11 rounded-xl border border-slate-200 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-        <button
-            class="px-6 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition">
-            Join
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- Live Statistics -->
-<div class="grid grid-cols-2 gap-4">
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            Bitrate
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            2.8 Mbps
-        </h3>
-
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            Latency
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            24 ms
-        </h3>
-
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            FPS
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            30
-        </h3>
-
-    </div>
-
-    <div class="bg-white rounded-2xl border border-slate-200 p-5">
-
-        <p class="text-slate-500 text-sm">
-            Codec
-        </p>
-
-        <h3 class="text-2xl font-black mt-2">
-            VP8
-        </h3>
-
-    </div>
-
+2.8 Mbps
 
 </div>
 
 </div>
 
 
+<div class="stat-card p-2.5">
+
+<div class="text-[9px] text-slate-400">
+ROUND TRIP TIME
 </div>
+
+<div
+id="rtt"
+class="text-sm font-semibold mono mt-1">
+
+24 ms
+
+</div>
+
+</div>
+
+
+<div class="stat-card p-2.5">
+
+<div class="text-[9px] text-slate-400">
+PACKET LOSS
+</div>
+
+<div
+id="packetLoss"
+class="text-sm font-semibold mono mt-1">
+
+0.0 %
+
+</div>
+
+</div>
+
+
+<div class="stat-card p-2.5">
+
+<div class="text-[9px] text-slate-400">
+JITTER
+</div>
+
+<div
+id="jitter"
+class="text-sm font-semibold mono mt-1">
+
+3.1 ms
+
+</div>
+
+</div>
+
+
+<div class="stat-card p-2.5">
+
+<div class="text-[9px] text-slate-400">
+FPS
+</div>
+
+<div
+id="fps"
+class="text-sm font-semibold mono mt-1">
+
+30
+
+</div>
+
+</div>
+
+
+<div class="stat-card p-2.5">
+
+<div class="text-[9px] text-slate-400">
+CODEC
+</div>
+
+<div
+id="codec"
+class="text-sm font-semibold mono mt-1">
+
+VP8
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- NETWORK -->
+<!-- ===================================================== -->
+
+<div class="panel p-3.5">
+
+<div class="section-title mb-2">
+Network
+</div>
+
+
+<div class="space-y-2 text-[10px] mono">
+
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">
+Candidate Type
+</span>
+
+<span
+id="candidateType"
+class="text-slate-700">
+
+-
+
+</span>
+
+</div>
+
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">
+Local Candidate
+</span>
+
+<span
+id="localCandidate"
+class="text-slate-700 max-w-[210px] truncate">
+
+-
+
+</span>
+
+</div>
+
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">
+Remote Candidate
+</span>
+
+<span
+id="remoteCandidate"
+class="text-slate-700 max-w-[210px] truncate">
+
+-
+
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</section>
+
+</div>
+
 </main>
-<!-- <script src="https://cdn.jsdelivr.net/npm/peerjs@1.4.7/dist/peerjs.min.js"></script> -->
+
+
+<!-- ===================================================== -->
+<!-- SCRIPT -->
+<!-- ===================================================== -->
+
 <script src="/playground/p2p/script.js"></script>
+
+
+<script>
+
+/*
+|--------------------------------------------------------------------------
+| UI STATE HELPERS
+|--------------------------------------------------------------------------
+|
+| These elements are intentionally exposed so your WebRTC script can
+| update them directly.
+|
+*/
+
+window.RTCUI = {
+
+iceState:
+document.getElementById("iceState"),
+
+dtlsState:
+document.getElementById("dtlsState"),
+
+signalState:
+document.getElementById("signalState"),
+
+iceConnection:
+document.getElementById("iceConnection"),
+
+dtlsConnection:
+document.getElementById("dtlsConnection"),
+
+signalingConnection:
+document.getElementById("signalingConnection"),
+
+connectionBadge:
+document.getElementById("connectionBadge"),
+
+bitrate:
+document.getElementById("bitrate"),
+
+rtt:
+document.getElementById("rtt"),
+
+packetLoss:
+document.getElementById("packetLoss"),
+
+jitter:
+document.getElementById("jitter"),
+
+fps:
+document.getElementById("fps"),
+
+codec:
+document.getElementById("codec"),
+
+candidateType:
+document.getElementById("candidateType"),
+
+localCandidate:
+document.getElementById("localCandidate"),
+
+remoteCandidate:
+document.getElementById("remoteCandidate")
+
+};
+
+
+/*
+|--------------------------------------------------------------------------
+| Example helper
+|--------------------------------------------------------------------------
+|
+| From your WebRTC code you can do:
+|
+| RTCUI.iceState.textContent = pc.iceConnectionState;
+|
+*/
+
+function updateRTCState(pc){
+
+if(!pc) return;
+
+
+RTCUI.iceState.textContent =
+pc.iceConnectionState;
+
+RTCUI.iceConnection.textContent =
+pc.iceConnectionState;
+
+
+RTCUI.signalState.textContent =
+pc.signalingState;
+
+RTCUI.signalingConnection.textContent =
+pc.signalingState;
+
+
+RTCUI.connectionBadge.textContent =
+pc.connectionState.toUpperCase();
+
+
+if(pc.connectionState === "connected"){
+
+RTCUI.connectionBadge.className =
+"px-2 py-1 rounded-md bg-emerald-50 text-[9px] font-semibold text-emerald-600 mono";
+
+}
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Example getStats()
+|--------------------------------------------------------------------------
+|
+| Connect this to your actual RTCPeerConnection:
+|
+| updateRTCStats(peerConnection);
+|
+*/
+
+async function updateRTCStats(pc){
+
+if(!pc) return;
+
+const stats =
+await pc.getStats();
+
+
+stats.forEach(report => {
+
+
+if(report.type === "candidate-pair" &&
+report.state === "succeeded"){
+
+if(report.currentRoundTripTime){
+
+RTCUI.rtt.textContent =
+Math.round(
+report.currentRoundTripTime * 1000
+) + " ms";
+
+}
+
+}
+
+
+if(report.type === "inbound-rtp" &&
+report.kind === "video"){
+
+if(report.jitter !== undefined){
+
+RTCUI.jitter.textContent =
+(report.jitter * 1000).toFixed(1) + " ms";
+
+}
+
+if(report.framesPerSecond){
+
+RTCUI.fps.textContent =
+Math.round(report.framesPerSecond);
+
+}
+
+if(report.packetsLost !== undefined &&
+report.packetsReceived !== undefined){
+
+const total =
+report.packetsLost +
+report.packetsReceived;
+
+if(total > 0){
+
+const loss =
+(report.packetsLost / total) * 100;
+
+RTCUI.packetLoss.textContent =
+loss.toFixed(2) + " %";
+
+}
+
+}
+
+}
+
+});
+
+}
+
+</script>
+
 </body>
+
+</html>
