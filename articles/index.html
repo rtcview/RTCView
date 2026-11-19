@@ -1,23 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="index, follow, max-image-preview:large">
 
-    <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>RTCView Articles | Asterisk, SIP, VoIP &amp; WebRTC Guides</title>
+  <meta name="description" content="Explore practical real-time communication tutorials from RTCView. Start with our step-by-step Asterisk PBX, SIP, PJSIP and VoIP engineering guide.">
+  <meta name="author" content="RTCView">
+  <link rel="canonical" href="https://rtcview.com/articles/">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RTCView">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="RTCView Articles — Practical VoIP &amp; Real-Time Communication Guides">
+  <meta property="og:description" content="Practical engineering tutorials on Asterisk PBX, SIP, PJSIP, VoIP and real-time communications.">
+  <meta property="og:url" content="https://rtcview.com/articles/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RTCView Articles | VoIP &amp; Asterisk Tutorials">
+  <meta name="twitter:description" content="Hands-on learning for engineers building real-time communication systems.">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://rtcview.com/#organization",
+        "name": "RTCView",
+        "url": "https://rtcview.com/"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://rtcview.com/#website",
+        "name": "RTCView",
+        "url": "https://rtcview.com/",
+        "publisher": { "@id": "https://rtcview.com/#organization" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://rtcview.com/articles/#webpage",
+        "url": "https://rtcview.com/articles/",
+        "name": "RTCView Articles | Asterisk, SIP, VoIP & WebRTC Guides",
+        "description": "Practical real-time communication tutorials from RTCView, starting with an Asterisk PBX and SIP calling guide.",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://rtcview.com/#website" },
+        "publisher": { "@id": "https://rtcview.com/#organization" },
+        "breadcrumb": { "@id": "https://rtcview.com/articles/#breadcrumb" },
+        "mainEntity": { "@id": "https://rtcview.com/articles/#list" }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://rtcview.com/articles/#list",
+        "name": "Published RTCView engineering articles",
+        "numberOfItems": 1,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Asterisk PBX Tutorial 2027: Install, Configure & Make Your First SIP Call",
+            "url": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/"
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://rtcview.com/articles/#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rtcview.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://rtcview.com/articles/" }
+        ]
+      }
+    ]
+  }
+  </script>
 
-    <title>Getting Started</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #0b1d30;
+      --body: #405368;
+      --muted: #62758a;
+      --blue: #145caa;
+      --teal: #087f87;
+      --line: #dce6ef;
+      --pale: #f4f8fc;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #fff; color: var(--body); font: 16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid #27a2c5; outline-offset: 4px; border-radius: 3px; }
+    .wrap { width: min(1140px, calc(100% - 48px)); margin-inline: auto; }
+    .skip { position: absolute; left: 16px; top: -90px; background: #fff; padding: 9px 14px; z-index: 5; }
+    .skip:focus { top: 12px; }
+    .header { border-bottom: 1px solid var(--line); background: #fff; }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 20px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-size: 1.45rem; font-weight: 820; letter-spacing: -.055em; white-space: nowrap; }
+    .logo-symbol { display: inline-grid; place-items: center; width: 31px; height: 31px; color: #fff; background: var(--blue); border-radius: 9px; font-size: 21px; line-height: 1; }
+    .nav-links { display: flex; align-items: center; gap: clamp(15px,3vw,33px); font-size: .92rem; font-weight: 650; }
+    .nav-links a { color: #50657b; }
+    .nav-links a:hover, .nav-links [aria-current] { color: var(--blue); }
+    .crumbs { display: flex; align-items: center; gap: 10px; margin-top: 29px; color: var(--muted); font-size: .82rem; }
+    .crumbs a:hover { color: var(--blue); text-decoration: underline; }
+    .intro { max-width: 780px; padding: 76px 0 57px; }
+    .eyebrow { margin: 0 0 17px; font-size: .76rem; line-height: 1.5; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { color: var(--ink); line-height: 1.18; letter-spacing: -.038em; }
+    h1 { max-width: 720px; font-size: clamp(2.45rem,5vw,4.25rem); font-weight: 780; margin-bottom: 21px; }
+    .intro p:last-child { font-size: clamp(1.06rem,1.6vw,1.21rem); line-height: 1.8; max-width: 690px; margin-bottom: 0; }
+    .section-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .section-bar h2 { margin: 0; font-size: 1.47rem; }
+    .count { border: 1px solid var(--line); border-radius: 50px; padding: 5px 12px; font-size: .78rem; color: #536b80; white-space: nowrap; }
+    .feature { display: grid; grid-template-columns: minmax(0,1.08fr) minmax(300px,.92fr); overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 22px 55px rgba(19,49,77,.065); }
+    .feature-copy { padding: clamp(25px,4.1vw,52px); }
+    .meta { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 24px; }
+    .tag { color: #175c92; background: #eaf3fb; border: 1px solid #dcecf8; padding: 4px 10px; border-radius: 6px; font-size: .72rem; font-weight: 750; letter-spacing: .015em; }
+    .tag.subtle { color: #576e80; border-color: #e8edf1; background: #f5f7f9; }
+    .feature h3 { margin-bottom: 18px; font-size: clamp(1.62rem,2.9vw,2.35rem); }
+    .feature h3 a:hover { color: var(--blue); }
+    .feature-copy > p { max-width: 565px; font-size: .98rem; line-height: 1.85; }
+    .details { display: flex; flex-wrap: wrap; gap: 9px 21px; margin: 23px 0 27px; color: #536c81; font-size: .84rem; }
+    .details span::before { content: "•"; color: var(--teal); margin-right: 8px; font-weight: 900; }
+    .read { display: inline-flex; align-items: center; gap: 10px; padding: 12px 19px; background: var(--blue); color: white; border-radius: 8px; font-weight: 700; font-size: .91rem; transition: background .18s ease, transform .18s ease; }
+    .read:hover { background: #0c477f; transform: translateY(-1px); }
+    .feature-art { display: grid; place-items: center; min-height: 380px; padding: 18px; background: linear-gradient(145deg,#0d263f,#143f66); }
+    .feature-art svg { display: block; width: 100%; max-width: 480px; height: auto; }
+    .topics { padding: 62px 0 80px; }
+    .topics h2 { font-size: 1.43rem; margin-bottom: 9px; }
+    .topics-intro { margin-bottom: 24px; max-width: 610px; }
+    .topic-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; }
+    .topic { padding: 24px 23px; border: 1px solid var(--line); background: #fff; border-radius: 12px; min-height: 166px; transition: border-color .18s ease, background .18s ease; }
+    .topic:hover { border-color: #9dbdd8; background: #f8fbfe; }
+    .topic small { color: var(--teal); font-size: .73rem; font-weight: 800; letter-spacing: .07em; }
+    .topic strong { display: block; margin: 12px 0 7px; color: var(--ink); font-size: 1.08rem; line-height: 1.35; }
+    .topic span { display: block; font-size: .87rem; color: #5c7084; line-height: 1.6; }
+    .foot { border-top: 1px solid var(--line); background: #fafcfe; }
+    .foot-inner { padding: 30px 0; display: flex; justify-content: space-between; gap: 18px; font-size: .85rem; }
+    .foot strong { color: var(--ink); }
+    .foot a { color: var(--blue); font-weight: 650; }
+    @media (max-width: 800px) {
+      .feature { grid-template-columns: 1fr; }
+      .feature-art { order: -1; min-height: 250px; }
+      .feature-art svg { max-width: 390px; }
+      .topic-grid { grid-template-columns: 1fr; }
+      .topic { min-height: 0; }
+      .intro { padding: 61px 0 47px; }
+    }
+    @media (max-width: 480px) {
+      .wrap { width: min(100% - 32px,1140px); }
+      .nav { min-height: 68px; }
+      .logo { font-size: 1.31rem; }
+      .nav-links { gap: 17px; font-size: .83rem; }
+      .intro { padding: 51px 0 42px; }
+      .feature-copy { padding: 25px 22px; }
+      .feature-art { min-height: 210px; }
+      .section-bar h2 { font-size: 1.25rem; }
+      .foot-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .read, .topic { transition: none; } }
+  </style>
 </head>
 <body>
-    
+  <a class="skip" href="#main-content">Skip to content</a>
+
+  <header class="header">
+    <div class="wrap nav">
+      <a class="logo" href="/" aria-label="RTCView homepage"><span class="logo-symbol" aria-hidden="true">✳</span>RTCView</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/articles/" aria-current="page">Articles</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Articles</span>
+    </nav>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">RTCView / Engineering Library</p>
+      <h1 id="page-title">Technical articles, built for engineers.</h1>
+      <p>Practical knowledge for building real-time communication systems. Explore hands-on guides covering Asterisk PBX, SIP, PJSIP, VoIP, and the engineering behind connected experiences.</p>
+    </section>
+
+    <section aria-labelledby="articles-title">
+      <div class="section-bar">
+        <h2 id="articles-title">Published articles</h2>
+        <span class="count">1 article</span>
+      </div>
+
+      <article class="feature">
+        <div class="feature-copy">
+          <div class="meta"><span class="tag">VoIP engineering</span><span class="tag subtle">Beginner guide</span></div>
+          <h3><a href="/articles/rtcview-asterisk-learn-2027/">Asterisk PBX Tutorial 2027: Install, Configure &amp; Make Your First SIP Call</a></h3>
+          <p>A complete, hands-on introduction to Asterisk. Install the PBX on Ubuntu, configure a PJSIP endpoint, register Linphone as extension <strong>1001</strong>, and dial <strong>7000</strong> to hear your first Hello World call.</p>
+          <div class="details" aria-label="Topics covered"><span>Asterisk 24</span><span>SIP &amp; PJSIP</span><span>Linphone</span><span>Dialplan</span></div>
+          <a class="read" href="/articles/rtcview-asterisk-learn-2027/">Read the tutorial <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="feature-art">
+          <svg viewBox="0 0 500 320" role="img" aria-labelledby="diagram-title diagram-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="diagram-title">Asterisk PBX and Linphone call flow</title>
+            <desc id="diagram-desc">Linphone extension 1001 registers with Asterisk. Dialing 7000 starts a SIP call and Asterisk sends Hello World audio back to the softphone.</desc>
+            <g fill="none" stroke="#6797ba" stroke-width="2" opacity=".65"><path d="M153 153H315"/><path d="M153 192H315"/></g>
+            <g fill="#cbe7f7"><path d="m307 146 11 7-11 7z"/><path d="m162 185-11 7 11 7z"/></g>
+            <rect x="17" y="94" width="137" height="139" rx="15" fill="#fff" fill-opacity=".095" stroke="#6e9ab9"/>
+            <rect x="320" y="94" width="163" height="139" rx="15" fill="#fff" fill-opacity=".095" stroke="#6e9ab9"/>
+            <rect x="65" y="109" width="42" height="66" rx="7" fill="none" stroke="#b7e2f7" stroke-width="3"/>
+            <path d="M77 119h18M80 161h13" stroke="#b7e2f7" stroke-width="3" stroke-linecap="round"/>
+            <g stroke="#b7e2f7" stroke-width="2.6" stroke-linecap="round"><path d="M375 136h53M375 151h53M375 166h37"/><path d="M370 125h64v53h-64z" fill="none"/></g>
+            <g font-family="system-ui,-apple-system,sans-serif" fill="#eff8ff" text-anchor="middle">
+              <text x="250" y="35" font-size="13" font-weight="700" letter-spacing="2">YOUR FIRST SIP CALL</text>
+              <text x="86" y="198" font-size="16" font-weight="700">Linphone</text>
+              <text x="86" y="216" font-size="12" opacity=".8">Ext. 1001</text>
+              <text x="401" y="198" font-size="16" font-weight="700">Asterisk PBX</text>
+              <text x="401" y="216" font-size="12" opacity=".8">Dial 7000</text>
+              <text x="236" y="139" font-size="12" fill="#a9ddf6">SIP →</text>
+              <text x="236" y="215" font-size="12" fill="#a9ddf6">← RTP audio</text>
+              <text x="250" y="289" font-size="14" font-weight="650" fill="#d8f4ff">Learn the architecture. Build the call.</text>
+            </g>
+          </svg>
+        </div>
+      </article>
+    </section>
+
+    <section class="topics" aria-labelledby="topics-title">
+      <h2 id="topics-title">Explore the guide by topic</h2>
+      <p class="topics-intro">Go straight to a practical section of the Asterisk tutorial.</p>
+      <div class="topic-grid">
+        <a class="topic" href="/articles/rtcview-asterisk-learn-2027/#sip-explained">
+          <small>01 / FUNDAMENTALS</small><strong>SIP, PJSIP &amp; RTP</strong><span>Understand how signaling and audio transport work together.</span>
+        </a>
+        <a class="topic" href="/articles/rtcview-asterisk-learn-2027/#pjsip-setup">
+          <small>02 / CONFIGURATION</small><strong>Configure Asterisk PJSIP</strong><span>Set up an endpoint, authentication, and registration.</span>
+        </a>
+        <a class="topic" href="/articles/rtcview-asterisk-learn-2027/#first-call">
+          <small>03 / HANDS-ON</small><strong>Make your first SIP call</strong><span>Call extension 7000 and hear Hello World audio.</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <div><strong>RTCView</strong> · Engineering clarity for real-time communications.</div>
+      <div><a href="/">Home</a> · <a href="/articles/">Articles</a></div>
+    </div>
+  </footer>
 </body>
 </html>
