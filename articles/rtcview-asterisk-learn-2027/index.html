@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <title>Asterisk PBX Tutorial 2027: PJSIP &amp; First SIP Call | RTCView</title>
+  <meta name="description" content="Learn Asterisk PBX step by step: install on Ubuntu, configure PJSIP extension 1001, register Linphone, and make a SIP call to 7000 for Hello World audio.">
+  <meta name="author" content="RTCView">
+  <link rel="canonical" href="https://rtcview.com/articles/rtcview-asterisk-learn-2027/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="RTCView">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Asterisk PBX Tutorial 2027: Install, Configure &amp; Make a SIP Call">
+  <meta property="og:description" content="A practical Asterisk 24 guide: install from source, configure PJSIP 1001, register Linphone, and hear Hello World by dialing 7000.">
+  <meta property="og:url" content="https://rtcview.com/articles/rtcview-asterisk-learn-2027/">
+  <meta property="og:image" content="https://rtcview.com/articles/rtcview-asterisk-learn-2027/asterisk-tutorial-og.png">
+  <meta property="og:image:secure_url" content="https://rtcview.com/articles/rtcview-asterisk-learn-2027/asterisk-tutorial-og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Asterisk PBX tutorial showing Linphone softphone, SIP signaling, RTP audio, and a Hello World call to 7000">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Asterisk PBX Tutorial 2027: Install, Configure &amp; Make a SIP Call">
+  <meta name="twitter:description" content="A practical Asterisk 24 guide: install from source, configure PJSIP 1001, register Linphone, and hear Hello World by dialing 7000.">
+  <meta name="twitter:image" content="https://rtcview.com/articles/rtcview-asterisk-learn-2027/asterisk-tutorial-og.png">
+  <meta name="twitter:image:alt" content="RTCView Asterisk PBX tutorial: SIP phone communicates with PBX and plays Hello World">
+  <!-- Set the real datePublished/dateModified only after actual publication; do not invent dates. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rtcview.com/#organization",
+      "name": "RTCView",
+      "url": "https://rtcview.com/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rtcview.com/#website",
+      "url": "https://rtcview.com/",
+      "name": "RTCView",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://rtcview.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#webpage",
+      "url": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/",
+      "name": "Asterisk PBX Tutorial 2027: Install, Configure & Make Your First SIP Call",
+      "description": "Learn Asterisk PBX step by step: install on Ubuntu, configure PJSIP extension 1001, register Linphone, and make a SIP call to 7000 for Hello World audio.",
+      "isPartOf": {
+        "@id": "https://rtcview.com/#website"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#primaryimage"
+      },
+      "breadcrumb": {
+        "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#breadcrumb"
+      },
+      "inLanguage": "en",
+      "mainEntity": {
+        "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#article"
+      }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#primaryimage",
+      "url": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/asterisk-tutorial-og.png",
+      "contentUrl": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/asterisk-tutorial-og.png",
+      "width": 1200,
+      "height": 630,
+      "caption": "RTCView Asterisk PBX tutorial with Linphone, SIP and RTP call flow illustration"
+    },
+    {
+      "@type": [
+        "Article",
+        "TechArticle"
+      ],
+      "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#article",
+      "headline": "Asterisk PBX Tutorial 2027: Install, Configure & Make Your First SIP Call",
+      "description": "Learn Asterisk PBX step by step: install on Ubuntu, configure PJSIP extension 1001, register Linphone, and make a SIP call to 7000 for Hello World audio.",
+      "url": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/",
+      "mainEntityOfPage": {
+        "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#webpage"
+      },
+      "author": {
+        "@type": "Organization",
+        "@id": "https://rtcview.com/#organization",
+        "name": "RTCView",
+        "url": "https://rtcview.com/"
+      },
+      "publisher": {
+        "@id": "https://rtcview.com/#organization"
+      },
+      "image": {
+        "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#primaryimage"
+      },
+      "thumbnailUrl": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/asterisk-tutorial-og.png",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Beginner",
+      "articleSection": "VoIP & Signaling",
+      "keywords": [
+        "Asterisk PBX tutorial",
+        "Asterisk 24 installation",
+        "Asterisk PJSIP configuration",
+        "Linphone SIP registration",
+        "Asterisk Hello World dialplan",
+        "VoIP tutorial"
+      ],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Asterisk PBX"
+        },
+        {
+          "@type": "Thing",
+          "name": "Session Initiation Protocol"
+        },
+        {
+          "@type": "Thing",
+          "name": "Voice over IP"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://rtcview.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Articles",
+          "item": "https://rtcview.com/articles/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Asterisk PBX Tutorial",
+          "item": "https://rtcview.com/articles/rtcview-asterisk-learn-2027/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <style>
+    :root { --ink:#142b44; --ink-strong:#0b1d30; --body:#405368; --muted:#62758a; --blue:#145caa; --blue-deep:#194777; --teal:#087f87; --line:#dce6ef; --pale:#f4f8fc; --panel:#fff; --code:#0e2136; --codefg:#e7f1fc; --shadow:0 18px 50px rgba(20,46,78,.07); --radius:16px; }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:104px}
+    body{margin:0;background:#fff;color:var(--body);font:16px/1.75 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:3px}
+    a:hover{color:var(--teal)}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #16a5cf;outline-offset:4px}
+    h1,h2,h3,h4,p,figure{margin-top:0}
+    h1,h2,h3,h4{color:var(--ink-strong);line-height:1.21;letter-spacing:-.029em}
+    h1{font-size:clamp(2.2rem,4vw,3.55rem);letter-spacing:-.047em;margin-bottom:22px}
+    h2{font-size:clamp(1.65rem,2.35vw,2.25rem);margin:0 0 20px}
+    h3{font-size:1.22rem;letter-spacing:-.02em;margin:34px 0 12px}
+    strong{color:var(--ink)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.9em}
+    p,li{overflow-wrap:break-word}
+    .skip{position:absolute;top:-90px;left:18px;z-index:100;padding:10px 16px;background:#fff}
+    .skip:focus{top:12px}
+    .container{max-width:1210px;margin:0 auto;padding:0 28px}
+    .topbar{height:78px;background:rgba(255,255,255,.98);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+    .navwrap{display:flex;align-items:center;justify-content:space-between;height:100%;gap:20px}
+    .brand{display:inline-flex;align-items:center;gap:11px;color:var(--ink-strong);text-decoration:none;font-size:1.4rem;letter-spacing:-.055em;font-weight:850;white-space:nowrap}
+    .brand-mark{display:grid;place-items:center;background:var(--ink-strong);color:#fff;border-radius:10px;width:39px;height:39px;box-shadow:inset -10px -8px 14px rgba(32,143,194,.12)}
+    .brand-mark svg{width:23px;height:23px}
+    .brand em{color:var(--blue);font-style:normal}
+    .toplinks{display:flex;align-items:center;gap:30px}
+    .toplinks a{color:#3d5268;text-decoration:none;font-size:.89rem;font-weight:650}
+    .toplinks a:hover{color:var(--blue)}
+    .navpill{border:1px solid #cddfec;color:var(--blue)!important;border-radius:9px;padding:8px 13px}
+    .breadcrumb{font-size:.78rem;color:var(--muted);padding:29px 0 0}
+    .breadcrumb a{color:var(--muted);text-decoration:none}
+    .breadcrumb span{margin:0 9px;color:#9aaabb}
+    .hero{background:linear-gradient(130deg,#fff 30%,#f4f9fe 100%);border-bottom:1px solid var(--line)}
+    .hero-grid{display:grid;grid-template-columns:1.19fr .81fr;gap:52px;align-items:center;padding-top:55px;padding-bottom:70px}
+    .eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:15px}
+    .intro{font-size:clamp(1.06rem,1.65vw,1.23rem);color:#506378;line-height:1.68;max-width:720px;margin-bottom:25px}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:23px}
+    .chip{border:1px solid #d5e4f0;background:#f6faff;border-radius:100px;padding:4px 11px;color:#31536e;font-size:.78rem;font-weight:700;white-space:nowrap}
+    .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;color:var(--muted);font-size:.79rem}
+    .byline .dot{color:#abbac7}
+    .hero-art{background:#fff;border:1px solid #deebf5;border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+    .hero-art svg,.hero-art img{display:block;width:100%;height:auto}
+    .hero-caption{font-size:.72rem;color:var(--muted);text-align:center;margin-top:9px}
+    .layout{display:grid;grid-template-columns:234px minmax(0,1fr);gap:56px;align-items:start;padding-top:58px;padding-bottom:70px}
+    .sidebar{position:sticky;top:101px;max-height:calc(100vh - 121px);overflow:auto;border-right:1px solid var(--line);padding:0 23px 18px 0}
+    .toc-title{font-size:.72rem;font-weight:850;letter-spacing:.11em;text-transform:uppercase;color:var(--ink);margin:0 0 15px}
+    .toc-list{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+    .toc-list a{display:block;border-left:2px solid transparent;color:#607488;font-size:.82rem;line-height:1.4;padding:8px 8px 8px 13px;text-decoration:none}
+    .toc-list a:hover,.toc-list a[aria-current="true"]{border-left-color:var(--blue);background:#f5faff;color:var(--blue)}
+    .mobile-toc{display:none}
+    .article{min-width:0;max-width:815px}
+    .article section{margin:0 0 67px;scroll-margin-top:110px}
+    .article p{margin-bottom:16px}
+    .article ul,.article ol{padding-left:23px;margin:0 0 22px}
+    .article li{margin:0 0 9px}
+    .kicker{display:flex;align-items:center;gap:10px;color:var(--blue);font-weight:850;letter-spacing:.08em;text-transform:uppercase;font-size:.7rem;margin-bottom:13px}
+    .kicker::before{content:"";height:2px;width:23px;background:var(--blue)}
+    .lede{font-size:1.1rem;color:#42586e}
+    .leadbox{background:var(--pale);border:1px solid #dbe9f5;border-radius:var(--radius);padding:23px 25px;margin-bottom:28px}
+    .leadbox p:last-child,.note p:last-child{margin-bottom:0}
+    .leadbox .label,.note .label{font-size:.73rem;text-transform:uppercase;letter-spacing:.09em;color:var(--blue);font-weight:900;margin:0 0 7px}
+    .note{border:1px solid #d8e5ef;border-left:4px solid var(--blue);padding:18px 22px;border-radius:0 11px 11px 0;margin:24px 0;background:#f8fbfe;font-size:.92rem}
+    .note.warning{background:#fffaf0;border-color:#f1e4c6;border-left-color:#b57d16}
+    .note.warning .label{color:#85560a}
+    .note.success{background:#f1faf9;border-color:#cde8e6;border-left-color:var(--teal)}
+    .note.success .label{color:var(--teal)}
+    .steps{counter-reset:steps;list-style:none!important;padding:0!important;margin:0 0 22px!important}
+    .steps>li{position:relative;counter-increment:steps;padding-left:46px;margin:0 0 22px!important}
+    .steps>li::before{content:counter(steps);display:grid;place-items:center;position:absolute;left:0;top:1px;width:29px;height:29px;background:#eaf3fb;color:var(--blue);border-radius:9px;font-size:.81rem;font-weight:900}
+    .two-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0 27px}
+    .mini-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+    .mini-card h3{font-size:1rem;margin:0 0 7px}
+    .mini-card p{font-size:.89rem;line-height:1.65;margin:0}
+    .table-scroll{width:100%;overflow:auto;border:1px solid var(--line);border-radius:13px;margin:20px 0 25px}
+    table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:530px}
+    th,td{text-align:left;vertical-align:top;padding:13px 16px;border-bottom:1px solid var(--line)}
+    tr:last-child td{border-bottom:0}
+    th{background:#f2f7fc;color:var(--ink);font-weight:800}
+    td:first-child{font-weight:650;color:var(--ink)}
+    .codebox{border-radius:13px;overflow:hidden;border:1px solid #193951;margin:20px 0 25px;background:var(--code)}
+    .codehead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #2a4258;padding:9px 14px;color:#b4c9dd;font-size:.75rem;font-weight:700;gap:12px}
+    .copy{border:1px solid #46617b;color:#e8f5ff;background:#183651;padding:5px 11px;border-radius:7px;cursor:pointer;font:inherit;min-width:55px}
+    .copy:hover{background:#245077}
+    pre{padding:20px 18px;margin:0;overflow:auto;tab-size:2;color:var(--codefg);font:13px/1.72 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;scrollbar-color:#536d84 #0e2136}
+    pre code{font-size:inherit}
+    .figure{border:1px solid var(--line);border-radius:15px;padding:18px;margin:23px 0 27px;background:#fff}
+    .figure svg{display:block;max-width:100%;width:100%;height:auto}
+    figcaption{color:var(--muted);font-size:.8rem;margin-top:13px;line-height:1.5}
+    .milestones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 28px}
+    .milestone{background:#f5f9fd;border:1px solid #e0ebf4;border-radius:12px;padding:16px}
+    .milestone b{display:block;font-size:1.45rem;line-height:1;color:var(--blue);margin-bottom:9px}
+    .milestone span{font-size:.78rem;color:#52667a;font-weight:650;line-height:1.4;display:block}
+    details{border:1px solid var(--line);border-radius:12px;padding:0 18px;margin:10px 0;background:#fff}
+    summary{cursor:pointer;padding:16px 0;color:var(--ink);font-weight:750;line-height:1.5}
+    details[open] summary{border-bottom:1px solid var(--line);margin-bottom:15px}
+    details p{font-size:.92rem}
+    .ref-list{padding:0!important;list-style:none!important;display:grid;gap:14px}
+    .ref-list li{padding:15px 18px;border:1px solid var(--line);border-radius:10px;margin:0!important}
+    .ref-list a{font-weight:750;display:block;line-height:1.4;margin-bottom:5px}
+    .ref-list span{font-size:.84rem;line-height:1.4;display:block;color:var(--muted)}
+    .footer{border-top:1px solid var(--line);background:#f8fafc;padding:43px 0;color:#65768a}
+    .footerflex{display:flex;justify-content:space-between;gap:18px;align-items:center;font-size:.85rem}
+    .footer a{color:#425c74}
+    .footbrand{font-size:1.16rem;color:var(--ink-strong);font-weight:850;letter-spacing:-.04em}
+    #reading-progress{position:fixed;top:78px;left:0;height:2px;background:var(--blue);width:0%;z-index:40;pointer-events:none}
+    .up{position:fixed;right:21px;bottom:23px;width:43px;height:43px;border-radius:12px;border:1px solid #d6e3ef;background:#fff;color:var(--ink);box-shadow:0 5px 23px rgba(0,0,0,.08);cursor:pointer;font-size:1.25rem;display:none;z-index:20}
+    .up.visible{display:block}
+    .subdued{font-size:.84rem;color:var(--muted)}
+    @media (max-width:1020px){.layout{gap:31px;grid-template-columns:202px minmax(0,1fr)}.sidebar{padding-right:13px}.hero-grid{gap:24px}}
+    @media (max-width:760px){html{scroll-padding-top:76px}.topbar{height:65px}.container{padding:0 20px}.toplinks a:not(.navpill){display:none}.navpill{padding:6px 10px}.hero-grid{grid-template-columns:1fr;gap:28px;padding-top:33px;padding-bottom:38px}.hero-art{max-width:530px}.layout{grid-template-columns:1fr;padding-top:34px;gap:0}.sidebar{display:none}.mobile-toc{display:block;border:1px solid var(--line);padding:14px 18px;border-radius:12px;margin:0 0 38px;background:#f8fbfe}.mobile-toc summary{padding:0;list-style:disclosure-closed;font-size:.9rem}.mobile-toc[open] summary{border:0;margin:0 0 15px}.mobile-toc a{display:block;padding:8px 0;text-decoration:none;font-size:.88rem}.article section{margin-bottom:47px}.milestones{grid-template-columns:1fr 1fr}.two-cards{grid-template-columns:1fr}.footerflex{align-items:flex-start;flex-direction:column}#reading-progress{top:65px}}
+    @media (max-width:430px){.container{padding:0 16px}.hero-art{padding:13px}.milestones{grid-template-columns:1fr}h1{font-size:2.05rem}.leadbox,.note{padding:17px}pre{font-size:12px}.byline{gap:7px}.chip{font-size:.72rem}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+    @media print{.topbar,.sidebar,.mobile-toc,.up,#reading-progress,.copy{display:none!important}.hero{background:#fff}.hero-grid{grid-template-columns:1fr}.hero-art{display:none}.layout{display:block;padding-top:10px}.container{max-width:none}.article{max-width:none}.article section{break-inside:avoid}.codebox{break-inside:avoid}pre{white-space:pre-wrap;color:#122b42;background:#f4f7fb}.footer{background:#fff}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#article-start">Skip to article</a>
+  <header class="topbar">
+    <div class="container navwrap">
+      <a class="brand" href="/" aria-label="RTCView home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7.5v9h4l4-4.5-4-4.5H5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M16 6.5c3 2.4 3 8.6 0 11M19 4c4.4 4.2 4.4 11.8 0 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span>RTC<em>View</em></span>
+      </a>
+      <nav class="toplinks" aria-label="Primary">
+        <a href="#what-is-asterisk">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+        <a class="navpill" href="#quick-start">Start learning</a>
+      </nav>
+    </div>
+  </header>
+  <div id="reading-progress" aria-hidden="true"></div>
+  <div class="hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/articles/">Articles</a><span aria-hidden="true">/</span> Asterisk PBX tutorial</nav>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">RTCView Technical Academy / VoIP Engineering</p>
+          <h1>Asterisk PBX Tutorial 2027: Install, Configure &amp; Make Your First SIP Call</h1>
+          <p class="intro">Learn to install <strong>Asterisk PBX</strong>, configure a PJSIP extension, register Linphone on Android, and dial <strong>7000</strong> to hear your first Hello World greeting.</p>
+          <div class="chips" aria-label="Topics covered"><span class="chip">Beginner friendly</span><span class="chip">Asterisk 24 LTS</span><span class="chip">Ubuntu Linux</span><span class="chip">SIP &amp; PJSIP</span><span class="chip">Hands-on guide</span></div>
+          <div class="byline"><span><strong>RTCView</strong> · Practical VoIP learning</span><span class="dot">•</span><span>Practical step-by-step tutorial</span></div>
+        </div>
+        <div class="hero-art">
+          <img src="asterisk-linphone-sip-call-flow.svg" width="490" height="333" decoding="async" fetchpriority="high" alt="Linphone extension 1001 on Android exchanges SIP signaling with Asterisk PBX and receives RTP audio when dialing 7000.">
+          <p class="hero-caption">SIP signaling and RTP playback in the example Asterisk system</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container layout" id="article-start">
+    <aside class="sidebar" aria-label="Article contents"><p class="toc-title">On this page</p>
+      <ol class="toc-list">
+        <li><a href="#quick-start">Quick answer</a></li><li><a href="#what-is-asterisk">What is Asterisk?</a></li><li><a href="#sip-explained">SIP, PJSIP &amp; RTP</a></li><li><a href="#architecture">How the call works</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#installation">Install Asterisk 24</a></li><li><a href="#config-files">Configuration files</a></li><li><a href="#pjsip-setup">Configure PJSIP</a></li><li><a href="#rtp-setup">RTP &amp; firewall</a></li><li><a href="#dialplan">Hello World dialplan</a></li><li><a href="#asterisk-cli">Asterisk CLI</a></li><li><a href="#linphone">Register Linphone</a></li><li><a href="#first-call">Make your first call</a></li><li><a href="#troubleshooting">Troubleshooting</a></li><li><a href="#sip-trunks">Public phone numbers</a></li><li><a href="#faq">Frequently asked questions</a></li><li><a href="#next-steps">Conclusion &amp; sources</a></li>
+      </ol>
+    </aside>
+    <main class="article" id="main-content">
+      <details class="mobile-toc"><summary>Jump to a section</summary><nav aria-label="Mobile article contents"><a href="#quick-start">Quick answer</a><a href="#what-is-asterisk">What is Asterisk?</a><a href="#sip-explained">SIP, PJSIP &amp; RTP</a><a href="#architecture">How the call works</a><a href="#requirements">Requirements</a><a href="#installation">Install Asterisk 24</a><a href="#config-files">Configuration files</a><a href="#pjsip-setup">Configure PJSIP</a><a href="#rtp-setup">RTP &amp; firewall</a><a href="#dialplan">Hello World dialplan</a><a href="#asterisk-cli">Asterisk CLI</a><a href="#linphone">Register Linphone</a><a href="#first-call">Make your first call</a><a href="#troubleshooting">Troubleshooting</a><a href="#sip-trunks">Public phone numbers</a><a href="#faq">Frequently asked questions</a><a href="#next-steps">Conclusion &amp; sources</a></nav></details>
+      <article>
+        <section id="quick-start">
+          <p class="kicker">The essentials</p><h2>Asterisk PBX: the quick answer</h2>
+          <div class="leadbox"><p class="label">What you will build</p><p><strong>Asterisk is an open-source PBX that handles calls on a Linux computer.</strong> In this tutorial, Asterisk runs on Ubuntu and Linphone on Android registers as SIP extension <code>1001</code>. When you dial <code>7000</code>, Asterisk answers and plays a short “Hello World” recording.</p></div>
+          <p>We’ll build the PBX from source, create one SIP endpoint, load a simple dialplan, and make the internal test call. <strong>No public phone number, SIP trunk, or paid calling service is required.</strong></p>
+          <div class="milestones"><div class="milestone"><b>01</b><span>Install Asterisk on Ubuntu</span></div><div class="milestone"><b>02</b><span>Register Linphone as extension 1001</span></div><div class="milestone"><b>03</b><span>Call 7000 and hear Hello World</span></div></div>
+        </section>
+
+        <section id="what-is-asterisk">
+          <p class="kicker">01 / Fundamentals</p><h2>What is Asterisk PBX?</h2>
+          <p><a href="https://www.asterisk.org/" rel="noopener noreferrer">Asterisk</a> is open-source communications software that can turn a Linux machine into a <strong>PBX</strong> (Private Branch Exchange). A PBX manages call connections and can route calls according to rules you define.</p>
+          <p>In this example, the Asterisk server receives a call from Linphone and looks up the dialed number in its <strong>dialplan</strong>. For extension <code>7000</code>, the dialplan answers the call, plays a sound recording, and hangs up. This small project introduces the same core components used in more elaborate VoIP systems.</p>
+        </section>
+
+        <section id="sip-explained">
+          <p class="kicker">02 / Core concepts</p><h2>SIP vs. PJSIP vs. RTP: what is the difference?</h2>
+          <p>These terms often appear together, but they describe different jobs. <strong>SIP</strong> is a signaling protocol. <strong>PJSIP</strong> is the SIP stack and channel-driver family used here by Asterisk. <strong>RTP</strong> transports real-time audio packets once media is established.</p>
+          <div class="table-scroll"><table><thead><tr><th>Term</th><th>Plain-English explanation</th></tr></thead><tbody>
+            <tr><td>Asterisk</td><td>The server software that controls and routes calls.</td></tr>
+            <tr><td>PBX</td><td>A phone system that manages internal extensions and potentially outside calls.</td></tr>
+            <tr><td>SIP</td><td>Session Initiation Protocol: registers devices and establishes, changes or ends calls.</td></tr>
+            <tr><td>PJSIP</td><td>The SIP implementation and Asterisk configuration modules used for SIP endpoints.</td></tr>
+            <tr><td>SDP</td><td>Session Description Protocol: usually accompanies SIP messages to negotiate media details such as codecs and IP/port information.</td></tr>
+            <tr><td>RTP</td><td>Real-time Transport Protocol: typically carries the actual voice packets.</td></tr>
+            <tr><td>Codec</td><td>The algorithm/format used to encode and decode audio; this example uses G.711 μ-law (<code>ulaw</code>).</td></tr>
+            <tr><td>Extension</td><td>An internal identifier such as the Linphone SIP extension <code>1001</code> or the test number <code>7000</code>.</td></tr>
+            <tr><td>Dialplan</td><td>Rules in <code>extensions.conf</code> that decide what Asterisk does when a number is dialed.</td></tr>
+          </tbody></table></div>
+          <h3>How do SIP registration and calling differ?</h3>
+          <p>During <strong>registration</strong>, the softphone tells Asterisk where it can be reached and authenticates with its credentials. During a <strong>call</strong>, SIP messages such as <code>INVITE</code> and responses negotiate the session. In a typical established voice call, RTP carries audio; the exact media path depends on endpoint settings, network design and NAT behavior.</p>
+          <div class="note"><p class="label">Common beginner confusion</p><p>SIP does <strong>not</strong> usually carry the voice waveform itself. Port <code>5060/UDP</code> here handles SIP signaling; RTP uses a separate, configured UDP port range. These ports are example settings, not universal requirements.</p></div>
+        </section>
+
+        <section id="architecture">
+          <p class="kicker">03 / Call flow</p><h2>How the Asterisk + Linphone call works</h2>
+          <figure class="figure">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 285" role="img" aria-labelledby="flowtitle flowdesc">
+              <title id="flowtitle">Asterisk Hello World SIP call flow</title><desc id="flowdesc">Linphone registers as 1001. Dialing 7000 sends a SIP INVITE to Asterisk. The dialplan answers and plays Hello World audio using RTP before ending the call.</desc>
+              <rect x="3" y="3" width="744" height="279" rx="14" fill="#fafcff" stroke="#dbe7f2"/>
+              <rect x="27" y="56" width="175" height="150" rx="13" fill="white" stroke="#cddfeb"/><rect x="35" y="64" width="159" height="33" rx="8" fill="#eaf4fc"/><text x="115" y="85" font-size="15" fill="#124b81" font-weight="800" text-anchor="middle">Linphone</text><text x="115" y="123" font-size="13" fill="#36556d" text-anchor="middle">Android device</text><text x="115" y="148" font-size="12" fill="#36556d" text-anchor="middle">Extension 1001</text><text x="115" y="173" font-size="12" fill="#36556d" text-anchor="middle">SIP credentials</text>
+              <rect x="548" y="56" width="175" height="150" rx="13" fill="white" stroke="#cddfeb"/><rect x="556" y="64" width="159" height="33" rx="8" fill="#eaf4fc"/><text x="636" y="85" font-size="15" fill="#124b81" font-weight="800" text-anchor="middle">Asterisk 24</text><text x="636" y="123" font-size="13" fill="#36556d" text-anchor="middle">Ubuntu server</text><text x="636" y="148" font-size="12" fill="#36556d" text-anchor="middle">PJSIP + dialplan</text><text x="636" y="173" font-size="12" fill="#36556d" text-anchor="middle">Hello World sound</text>
+              <path d="M209 84H537" stroke="#145caa" stroke-width="3"/><path d="m528 77 11 7-11 7" stroke="#145caa" stroke-width="3" fill="none"/><text x="374" y="71" fill="#145caa" font-size="12" font-weight="800" text-anchor="middle">1 · REGISTER / INVITE (SIP)</text>
+              <path d="M538 143H211" stroke="#0d8790" stroke-width="3"/><path d="m219 136-11 7 11 7" stroke="#0d8790" stroke-width="3" fill="none"/><text x="374" y="130" fill="#0d8790" font-size="12" font-weight="800" text-anchor="middle">2 · HELLO WORLD (RTP)</text>
+              <path d="M209 203H538" stroke="#7e8fa2" stroke-width="2" stroke-dasharray="6 6"/><path d="m530 197 10 6-10 6" fill="none" stroke="#7e8fa2" stroke-width="2"/><text x="374" y="226" fill="#526a7f" font-size="12" font-weight="700" text-anchor="middle">3 · Session ends (SIP BYE)</text>
+              <text x="374" y="257" fill="#6b8296" font-size="11" text-anchor="middle">Simplified instructional diagram; arrows are logical flow, not a packet trace.</text>
+            </svg>
+            <figcaption>Asterisk call flow: Linphone registers as 1001, calls 7000, receives the Hello World recording, and disconnects.</figcaption>
+          </figure>
+          <ol class="steps"><li>Linphone on Android registers as SIP extension <code>1001</code> on the Asterisk server.</li><li>You dial <code>7000</code> from Linphone. Asterisk receives the SIP call attempt and looks up the dialplan.</li><li>The <code>from-internal</code> context answers the call, waits one second, and plays the <code>hello-world</code> sound.</li><li>Linphone receives the audio; Asterisk hangs up when playback finishes.</li></ol>
+        </section>
+
+        <section id="requirements">
+          <p class="kicker">04 / Before you begin</p><h2>What you need for this Asterisk tutorial</h2>
+          <p>Prepare an Ubuntu Linux computer or virtual machine with terminal access, an Android phone running Linphone, and a private network connecting both devices. The installation requires an internet connection to download the source and build dependencies.</p>
+          <div class="table-scroll"><table><thead><tr><th>Requirement</th><th>For this tutorial</th></tr></thead><tbody>
+            <tr><td>Operating system</td><td>Ubuntu Linux with a supported, maintained release</td></tr>
+            <tr><td>Asterisk</td><td>Asterisk 24, installed from source</td></tr>
+            <tr><td>SIP driver</td><td>PJSIP</td></tr>
+            <tr><td>Softphone</td><td>Linphone on Android</td></tr>
+            <tr><td>Network</td><td>Ubuntu and Android can reach each other over a trusted private network</td></tr>
+            <tr><td>SIP / audio</td><td>UDP 5060 for SIP; UDP 10000–20000 for RTP</td></tr>
+            <tr><td>SIP account / dialplan target</td><td>Extension <code>1001</code> / test number <code>7000</code></td></tr>
+          </tbody></table></div>
+          <div class="note"><p class="label">Network safety</p><p>Keep this setup on a private network. Use a strong SIP password and restrict access to your server; a learning configuration should not be exposed directly to the public internet.</p></div>
+        </section>
+
+        <section id="installation">
+          <p class="kicker">05 / Practical setup</p><h2>Install Asterisk 24 on Ubuntu from source</h2>
+          <p>We’ll compile Asterisk from source on the Ubuntu computer. Run the following commands in its terminal. Use a fresh learning environment, not a server already hosting live calls.</p>
+          <h3>Step 1 — Prepare your Ubuntu terminal</h3>
+          <div class="codebox"><div class="codehead"><span>Terminal · create a project folder</span><button class="copy" type="button" aria-label="Copy terminal commands">Copy</button></div><pre><code>mkdir -p ~/Desktop/Learning/asterisk/L1
+cd ~/Desktop/Learning/asterisk/L1</code></pre></div>
+          <p>This folder stores the Asterisk source files. If your system has no Desktop directory, choose another writable folder in your home directory.</p>
+          <h3>Step 2 — Download the Asterisk 24 source</h3>
+          <div class="codebox"><div class="codehead"><span>Terminal · official Asterisk distribution</span><button class="copy" type="button" aria-label="Copy download commands">Copy</button></div><pre><code>wget https://downloads.asterisk.org/pub/telephony/asterisk/asterisk-24-current.tar.gz
+tar -xzf asterisk-24-current.tar.gz
+cd asterisk-24*/</code></pre></div>
+          <p>The official <code>asterisk-24-current.tar.gz</code> archive provides the current source release within the Asterisk 24 series. The exact patch level may change over time.</p>
+          <h3>Step 3 — Install compilation prerequisites</h3>
+          <div class="codebox"><div class="codehead"><span>Terminal · build dependencies</span><button class="copy" type="button" aria-label="Copy prerequisite command">Copy</button></div><pre><code>sudo contrib/scripts/install_prereq install</code></pre></div>
+          <p>The included script installs supported build dependencies for your platform. Review its output and address errors before continuing. It may install many packages.</p>
+          <h3>Step 4 — Configure PJSIP and select modules</h3>
+          <div class="codebox"><div class="codehead"><span>Terminal · configure &amp; modules</span><button class="copy" type="button" aria-label="Copy configuration commands">Copy</button></div><pre><code>./configure --with-pjproject-bundled
+make menuselect</code></pre></div>
+          <p>Inside the module-selection screen, confirm that the modules needed by the tutorial are available, including <code>chan_pjsip</code>, <code>res_pjsip</code>, <code>res_rtp_asterisk</code>, <code>app_playback</code> and the <code>ulaw</code> codec. Save and exit.</p>
+          <h3>Step 5 — Compile and install</h3>
+          <div class="codebox"><div class="codehead"><span>Terminal · compile Asterisk</span><button class="copy" type="button" aria-label="Copy build commands">Copy</button></div><pre><code>make -j2
+sudo make install
+asterisk -V</code></pre></div>
+          <p>The <code>-j2</code> option runs two compilation jobs. Once installation finishes, <code>asterisk -V</code> prints the installed Asterisk version.</p>
+          <h3>Step 6 — Generate sample configuration files (new installations only)</h3>
+          <div class="codebox"><div class="codehead"><span>Terminal · new installations only</span><button class="copy" type="button" aria-label="Copy sample configuration commands">Copy</button></div><pre><code>sudo make samples
+ls -lah /etc/asterisk/</code></pre></div>
+          <div class="note warning"><p class="label">Do not overwrite a working PBX</p><p><code>make samples</code> can <strong>overwrite existing configuration files</strong>. Only run it on a fresh disposable installation (or after backing up and confirming you want to replace those files). Official Asterisk documentation explicitly warns about this.</p></div>
+        </section>
+
+        <section id="config-files">
+          <p class="kicker">06 / Files explained</p><h2>Important Asterisk configuration files</h2>
+          <div class="table-scroll"><table><thead><tr><th>File</th><th>Purpose in your PBX</th></tr></thead><tbody>
+            <tr><td><code>/etc/asterisk/pjsip.conf</code></td><td>SIP transport, endpoints, authentication and contact locations.</td></tr>
+            <tr><td><code>/etc/asterisk/extensions.conf</code></td><td>Dialplan: which actions to perform for dialed numbers.</td></tr>
+            <tr><td><code>/etc/asterisk/rtp.conf</code></td><td>Media port range for RTP audio.</td></tr>
+            <tr><td><code>/etc/asterisk/modules.conf</code></td><td>Module loading behavior.</td></tr>
+            <tr><td><code>/etc/asterisk/logger.conf</code></td><td>Logging and diagnostic output configuration.</td></tr>
+          </tbody></table></div>
+          <p>Before replacing the sample contents for this standalone lab, back up your files. The following command is only useful when those paths already exist:</p>
+          <div class="codebox"><div class="codehead"><span>Terminal · optional lab backups</span><button class="copy" type="button" aria-label="Copy backup command">Copy</button></div><pre><code>sudo cp -a /etc/asterisk/pjsip.conf /etc/asterisk/pjsip.conf.lab-backup
+sudo cp -a /etc/asterisk/extensions.conf /etc/asterisk/extensions.conf.lab-backup
+sudo cp -a /etc/asterisk/rtp.conf /etc/asterisk/rtp.conf.lab-backup</code></pre></div>
+        </section>
+
+        <section id="pjsip-setup">
+          <p class="kicker">07 / SIP registration</p><h2>Configure a PJSIP extension in Asterisk</h2>
+          <p>Asterisk uses <code>pjsip.conf</code> to define SIP transport, endpoint settings, authentication, and registered contact information. Open the file:</p>
+          <div class="codebox"><div class="codehead"><span>Ubuntu terminal · edit pjsip.conf</span><button class="copy" type="button" aria-label="Copy PJSIP editor command">Copy</button></div><pre><code>sudo nano /etc/asterisk/pjsip.conf</code></pre></div>
+          <p>For a fresh, isolated installation, configure one SIP endpoint named <code>1001</code>. Replace the password placeholder with your own strong password, and avoid retaining conflicting sample sections in the same file.</p>
+          <div class="codebox"><div class="codehead"><span>/etc/asterisk/pjsip.conf · extension 1001</span><button class="copy" type="button" aria-label="Copy PJSIP configuration">Copy</button></div><pre><code>[transport-udp]
+type=transport
+protocol=udp
+bind=0.0.0.0:5060
+
+; SIP extension 1001
+[1001]
+type=endpoint
+context=from-internal
+disallow=all
+allow=ulaw
+auth=auth1001
+aors=1001
+direct_media=no
+
+[auth1001]
+type=auth
+auth_type=userpass
+username=1001
+password=REPLACE_WITH_A_STRONG_PASSWORD
+
+[1001]
+type=aor
+max_contacts=2
+remove_existing=yes</code></pre></div>
+          <h3>How the PJSIP settings work</h3>
+          <div class="table-scroll"><table><thead><tr><th>Setting</th><th>Purpose</th></tr></thead><tbody>
+            <tr><td><code>transport-udp</code></td><td>Listens for SIP signaling using UDP port 5060.</td></tr>
+            <tr><td><code>type=endpoint</code></td><td>Describes extension <code>1001</code> and how Asterisk handles its SIP sessions.</td></tr>
+            <tr><td><code>context=from-internal</code></td><td>Routes calls from this endpoint into the matching dialplan context.</td></tr>
+            <tr><td><code>type=auth</code></td><td>Defines the SIP username and password used by Linphone.</td></tr>
+            <tr><td><code>type=aor</code></td><td>Holds the registration contact information for the extension.</td></tr>
+            <tr><td><code>allow=ulaw</code></td><td>Allows the G.711 μ-law codec for audio.</td></tr>
+            <tr><td><code>direct_media=no</code></td><td>Keeps media passing through Asterisk.</td></tr>
+          </tbody></table></div>
+          <p>The label <code>[1001]</code> appears twice because the endpoint and Address of Record (AoR) are different object types. The separate <code>[auth1001]</code> section supplies its credentials.</p>
+          <div class="note warning"><p class="label">Keep SIP private</p><p><code>bind=0.0.0.0:5060</code> listens on all IPv4 interfaces. Restrict connections to your trusted LAN or VPN. Depending on your Asterisk setup, changes to the PJSIP transport may need an Asterisk restart.</p></div>
+        </section>
+
+        <section id="rtp-setup">
+          <p class="kicker">08 / Media transport</p><h2>Set the RTP audio port range</h2>
+          <p>Now set the UDP ports available for RTP, which transports audio independently of SIP signaling. Open <code>rtp.conf</code>:</p>
+          <div class="codebox"><div class="codehead"><span>Terminal · edit RTP settings</span><button class="copy" type="button" aria-label="Copy RTP edit command">Copy</button></div><pre><code>sudo nano /etc/asterisk/rtp.conf</code></pre></div>
+          <div class="codebox"><div class="codehead"><span>/etc/asterisk/rtp.conf</span><button class="copy" type="button" aria-label="Copy RTP configuration">Copy</button></div><pre><code>[general]
+rtpstart=10000
+rtpend=20000</code></pre></div>
+          <p>The <code>10000–20000/UDP</code> range is a common lab configuration, not a set of public ports you should unconditionally open. If Ubuntu's firewall is enabled, allow SIP and RTP traffic <strong>only from your trusted LAN subnet</strong> using rules appropriate to your network, or connect through a correctly configured VPN.</p>
+          <div class="note"><p class="label">Why one-way audio happens</p><p>A SIP call can appear to connect while its RTP packets cannot reach the intended destination. When sound is missing, inspect RTP, codecs, routing, NAT, firewalls and the endpoint's advertised media addresses—not just SIP registration.</p></div>
+        </section>
+
+        <section id="dialplan">
+          <p class="kicker">09 / Call routing</p><h2>Create the Hello World dialplan in extensions.conf</h2>
+          <p>The dialplan tells Asterisk what should happen when somebody dials <code>7000</code>. Edit the file:</p>
+          <div class="codebox"><div class="codehead"><span>Terminal · edit dialplan</span><button class="copy" type="button" aria-label="Copy dialplan editor command">Copy</button></div><pre><code>sudo nano /etc/asterisk/extensions.conf</code></pre></div>
+          <p>For the fresh lab configuration, define this context and test extension:</p>
+          <div class="codebox"><div class="codehead"><span>/etc/asterisk/extensions.conf</span><button class="copy" type="button" aria-label="Copy Hello World dialplan">Copy</button></div><pre><code>[from-internal]
+exten =&gt; 7000,1,Answer()
+ same =&gt; n,Wait(1)
+ same =&gt; n,Playback(hello-world)
+ same =&gt; n,Hangup()</code></pre></div>
+          <p><code>Answer()</code> accepts the call. <code>Wait(1)</code> pauses briefly. <code>Playback(hello-world)</code> plays the bundled audio prompt, and <code>Hangup()</code> ends the session. The leading spaces before <code>same</code> are optional here.</p>
+          <h3>Where is the Hello World recording?</h3>
+          <p>One commonly installed English sound file is <code>/var/lib/asterisk/sounds/en/hello-world.gsm</code>. You can check for it:</p>
+          <div class="codebox"><div class="codehead"><span>Terminal · check sound file</span><button class="copy" type="button" aria-label="Copy file-check command">Copy</button></div><pre><code>ls -l /var/lib/asterisk/sounds/en/hello-world.*</code></pre></div>
+          <p>If nothing matches, inspect the installed sound packages and your sound-file language/path configuration. Sound availability depends on how Asterisk was built and installed.</p>
+        </section>
+
+        <section id="asterisk-cli">
+          <p class="kicker">10 / Start the server</p><h2>Start Asterisk and inspect the CLI</h2>
+          <p>To start Asterisk in the foreground with a verbose console on a lab system where it isn't already running:</p>
+          <div class="codebox"><div class="codehead"><span>Terminal · first start</span><button class="copy" type="button" aria-label="Copy first start command">Copy</button></div><pre><code>sudo asterisk -cvvv</code></pre></div>
+          <p>If Asterisk is already running, <strong>do not start a second instance</strong>. Connect to the active CLI instead:</p>
+          <div class="codebox"><div class="codehead"><span>Terminal · connect to active Asterisk</span><button class="copy" type="button" aria-label="Copy connect command">Copy</button></div><pre><code>sudo asterisk -rvvv</code></pre></div>
+          <p>Once you're at the <code>asterisk*</code> console prompt, try:</p>
+          <div class="codebox"><div class="codehead"><span>Asterisk CLI · reload &amp; diagnose</span><button class="copy" type="button" aria-label="Copy Asterisk CLI commands">Copy</button></div><pre><code>pjsip reload
+dialplan reload
+pjsip show transports
+pjsip show endpoints
+pjsip show contacts
+dialplan show from-internal</code></pre></div>
+          <p>The first two commands reload their relevant configurations. The others display transports, endpoints, registered contact information and the dialplan entries Asterisk currently knows about. For changed transport binding settings, restart the Asterisk service if a reload does not apply them.</p>
+        </section>
+
+        <section id="linphone">
+          <p class="kicker">11 / SIP registration</p><h2>Connect Linphone on Android to Asterisk</h2>
+          <p><a href="https://www.linphone.org/en/getting-started/" rel="noopener noreferrer">Linphone</a> is a SIP softphone. Install it on Android, connect the phone to the same reachable private LAN as the Ubuntu server, and obtain the Ubuntu machine's local IP address:</p>
+          <div class="codebox"><div class="codehead"><span>Ubuntu terminal · local IP address</span><button class="copy" type="button" aria-label="Copy local IP command">Copy</button></div><pre><code>hostname -I</code></pre></div>
+          <p>Use the private IP address that your Android phone can reach. If your phone is on a guest Wi-Fi network or network isolation is enabled, registration may fail until the devices can communicate.</p>
+          <p>In Linphone, select the option for a <strong>third-party SIP account</strong> (wording may vary by app version), then supply the following:</p>
+          <div class="table-scroll"><table><thead><tr><th>Linphone field</th><th>Setting</th></tr></thead><tbody>
+            <tr><td>Username / SIP ID</td><td><code>1001</code></td></tr>
+            <tr><td>Password</td><td>The strong password you entered under <code>[auth1001]</code>.</td></tr>
+            <tr><td>Domain / SIP server</td><td>Your Ubuntu computer's private, reachable IP address.</td></tr>
+            <tr><td>Transport</td><td>UDP</td></tr>
+            <tr><td>Port</td><td><code>5060</code>, if requested separately.</td></tr>
+          </tbody></table></div>
+          <p>Save the account, return to the Ubuntu Asterisk CLI, and enter:</p>
+          <div class="codebox"><div class="codehead"><span>Asterisk CLI · check registration</span><button class="copy" type="button" aria-label="Copy PJSIP contact command">Copy</button></div><pre><code>pjsip show contacts</code></pre></div>
+          <p>Look for the contact belonging to extension <code>1001</code>. Its SIP contact URI shows that Linphone has registered with Asterisk. A <code>NonQual</code> contact status can mean that periodic SIP OPTIONS qualification is disabled; it does not by itself mean registration failed.</p>
+        </section>
+
+        <section id="first-call">
+          <p class="kicker">12 / First SIP call</p><h2>Dial 7000 and hear “Hello World”</h2>
+          <p>Once Linphone is registered as extension <code>1001</code>, open its dial pad and enter the test number:</p>
+          <div class="codebox"><div class="codehead"><span>Linphone · dial this number</span><button class="copy" type="button" aria-label="Copy Hello World test number">Copy</button></div><pre><code>7000</code></pre></div>
+          <p>Asterisk receives the call, runs the <code>from-internal</code> dialplan, answers, waits one second, plays the built-in <code>hello-world</code> recording, and hangs up.</p>
+          <div class="note success"><p class="label">Successful result</p><p>You hear the “Hello World” recording in Linphone. This confirms that <strong>extension 1001 registered</strong>, Asterisk found the <strong>7000 dialplan entry</strong>, and the greeting reached the softphone.</p></div>
+          <p>You can watch the call steps appear in the Asterisk console while the test call is running.</p>
+        </section>
+
+
+        <section id="troubleshooting">
+          <p class="kicker">13 / Troubleshooting</p><h2>Fix common Asterisk and Linphone setup problems</h2>
+          <p>If the Hello World call does not work, inspect the SIP registration, dialplan, and audio configuration in that order.</p>
+          <div class="table-scroll"><table><thead><tr><th>Problem</th><th>What to check</th></tr></thead><tbody>
+            <tr><td>Linphone does not register</td><td>Check SIP username <code>1001</code>, password, server IP, UDP port <code>5060</code>, and LAN connectivity.</td></tr>
+            <tr><td>No SIP contact appears</td><td>Run <code>pjsip show endpoints</code> and <code>pjsip show contacts</code> in the Asterisk CLI.</td></tr>
+            <tr><td>Extension 7000 is not found</td><td>Run <code>dialplan show from-internal</code> and ensure <code>7000</code> is defined in <code>extensions.conf</code>.</td></tr>
+            <tr><td>No Hello World audio</td><td>Check the Asterisk sound files, the <code>Playback(hello-world)</code> line, codec support and RTP reachability.</td></tr>
+            <tr><td>Audio cannot reach Linphone</td><td>Check your firewall rules, RTP port range, routing and any NAT settings.</td></tr>
+          </tbody></table></div>
+          <h3>Useful Asterisk CLI checks</h3>
+          <div class="codebox"><div class="codehead"><span>Asterisk CLI · configuration checks</span><button class="copy" type="button" aria-label="Copy Asterisk diagnostic commands">Copy</button></div><pre><code>pjsip show transports
+pjsip show endpoints
+pjsip show contacts
+dialplan show from-internal</code></pre></div>
+          <p>For further details on SIP registration, see the <a href="https://docs.asterisk.org/Configuration/Channel-Drivers/SIP/Configuring-res_pjsip/Asterisk-PJSIP-Troubleshooting-Guide/" rel="noopener noreferrer">Asterisk PJSIP troubleshooting guide</a>.</p>
+        </section>
+
+
+        <section id="sip-trunks">
+          <p class="kicker">14 / Calling basics</p><h2>Do I need a phone number or SIP trunk?</h2>
+          <p><strong>No.</strong> The Asterisk extension <code>7000</code> is a local test number defined in your dialplan. Linphone can dial it over your private network without a purchased telephone number or SIP trunk.</p>
+          <p>A SIP trunk is generally used to connect a PBX with an outside telephony provider for calls to public mobile or landline numbers. It is not required for the Hello World example.</p>
+        </section>
+
+        <section id="faq">
+          <p class="kicker">15 / Frequently asked questions</p><h2>Asterisk PBX tutorial FAQ</h2>
+          <details><summary>Is Asterisk PBX free?</summary><p>Asterisk is open-source PBX software. This internal Hello World calling exercise does not require a paid telephone number, though your computer and network still have operating costs.</p></details>
+          <details><summary>What is PJSIP in Asterisk?</summary><p>PJSIP is the SIP implementation used to define Asterisk phone endpoints, authentication and registration. The main file used here is <code>pjsip.conf</code>.</p></details>
+          <details><summary>What is the difference between SIP and RTP?</summary><p>SIP establishes and controls the call. RTP transports the audio, such as the Hello World recording played back to Linphone.</p></details>
+          <details><summary>Which Asterisk version does this tutorial use?</summary><p>This tutorial follows an Asterisk 24 source installation. The <code>24-current</code> source archive can receive newer maintenance releases over time.</p></details>
+          <details><summary>How do I check that Linphone registered successfully?</summary><p>In the Asterisk CLI, run <code>pjsip show contacts</code> and look for a contact associated with extension <code>1001</code>.</p></details>
+          <details><summary>Why does extension 7000 not play audio?</summary><p>Confirm that the <code>from-internal</code> dialplan contains the <code>Playback(hello-world)</code> command, the greeting audio file is installed, and the RTP audio path is reachable.</p></details>
+          <details><summary>Do I need a SIP trunk for the Hello World call?</summary><p>No. The test number <code>7000</code> is handled entirely by your local Asterisk server.</p></details>
+        </section>
+
+        <section id="next-steps">
+          <p class="kicker">16 / Conclusion</p><h2>You’ve built your first working Asterisk SIP call</h2>
+          <p>You've installed Asterisk on Ubuntu, configured PJSIP extension <code>1001</code>, connected Linphone on Android, and called <code>7000</code> to hear the Hello World recording. Along the way, you saw how SIP registration, dialplan instructions and RTP audio fit together.</p>
+          <p>These are the core building blocks of an Asterisk PBX. Keep this example as a reference for understanding configuration files and checking the path from your SIP client to the server.</p>
+          <h3>Official documentation</h3>
+          <ul class="ref-list">
+            <li><a href="https://docs.asterisk.org/Getting-Started/Installing-Asterisk/Installing-Asterisk-From-Source/Building-and-Installing-Asterisk/" rel="noopener noreferrer">Asterisk: build and install from source</a><span>Official build instructions and information about sample configuration files.</span></li>
+            <li><a href="https://docs.asterisk.org/Configuration/Channel-Drivers/SIP/Configuring-res_pjsip/res_pjsip-Configuration-Examples/" rel="noopener noreferrer">Asterisk: PJSIP configuration examples</a><span>How SIP endpoints, authentication and registration are defined.</span></li>
+            <li><a href="https://docs.asterisk.org/Getting-Started/Hello-World/" rel="noopener noreferrer">Asterisk: Hello World example</a><span>Additional explanation of Asterisk dialplans and sound playback.</span></li>
+            <li><a href="https://www.linphone.org/en/docs/login-sip-account/" rel="noopener noreferrer">Linphone: connect a SIP account</a><span>Softphone account fields and login guidance.</span></li>
+          </ul>
+        </section>
+      </article>
+    </main>
+  </div>
+  <footer class="footer"><div class="container footerflex"><div><div class="footbrand">RTCView</div><div>Engineering clarity for real-time communications.</div></div><div><a href="/">Home</a> &nbsp;·&nbsp; <a href="#article-start">Back to article</a> &nbsp;·&nbsp; <span>© <span id="year">2026</span> RTCView</span></div></div></footer>
+  <button class="up" type="button" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+  <script>
+    (() => {
+      'use strict';
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+      document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', async () => {
+        const code = btn.closest('.codebox')?.querySelector('pre code');
+        if (!code) return;
+        try {
+          await navigator.clipboard.writeText(code.textContent);
+          const original = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(() => { btn.textContent = original; }, 1300);
+        } catch (_) { btn.textContent = 'Select text'; }
+      }));
+      const progress = document.getElementById('reading-progress');
+      const up = document.getElementById('back-to-top');
+      let ticking = false;
+      function update() {
+        const limit = document.documentElement.scrollHeight - innerHeight;
+        progress.style.width = (limit > 0 ? Math.min(100, scrollY / limit * 100) : 0) + '%';
+        up.classList.toggle('visible', scrollY > 750);
+        ticking = false;
+      }
+      addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive:true });
+      up.addEventListener('click', () => scrollTo({ top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+      update();
+    })();
+  </script>
+</body>
+</html>
